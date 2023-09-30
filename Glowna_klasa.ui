@@ -1,0 +1,25 @@
+<UI version="4.0" >
+ <class>Glowna_klasaClass</class>
+ <widget class="QWidget" name="Glowna_klasaClass" >
+  <property name="objectName" >
+   <string notr="true">Glowna_klasaClass</string>
+  </property>
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Glowna_klasa</string>
+  </property>$centralwidget$
+ </widget>
+ <layoutDefault spacing="6" margin="11" />
+ <pixmapfunction></pixmapfunction>
+ <resources>
+   <include location="Glowna_klasa.qrc"/>
+ </resources>
+ <connections/>
+</UI>
