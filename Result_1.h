@@ -42,7 +42,7 @@ public:
 
     inline void processing();
     void image_reload();
-    void if_empty();
+   // void if_empty();
     void image_reamove();
 
 protected:

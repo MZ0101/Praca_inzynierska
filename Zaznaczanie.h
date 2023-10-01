@@ -36,6 +36,7 @@ protected:
     
     bool eventFilter(QObject* object, QEvent* event) override;
 
+
     protected slots:
         void previous_r();
         void another_r();

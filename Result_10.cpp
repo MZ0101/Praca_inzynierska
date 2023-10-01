@@ -77,6 +77,15 @@ inline void Result_10::zmiana()
 		this->main_result->image_name.setText("Image name: " + this->main_result->files_list[this->main_result->current_image_index]);
 	}
 	this->series_labels[this->current_series].setStyleSheet("background-color: white; border : 2px solid green; font-weight: bold;");
+
+
+	for (int i{ this->max_series + 1 }; i < 9; i++)
+	{
+
+		this->series_labels[i].setText("EMPTY");
+		this->series_labels[i].setStyleSheet("background-color: white; border : 2px solid red;");
+	}
+
 }
 
 void Result_10::image_remove()

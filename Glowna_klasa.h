@@ -49,15 +49,22 @@ public:
     void result_10_create();
     void series_1_ch();
     void series_10_ch();
+   // void for_control_widget_method();
+
+
 
     template <class T>
     void common_calculations(T* execute)
     {
         this->division = 0;
         this->average_way = 0;
+       // this->control_widget->method_label_box->setText("Method: " + this->control_widget->method_label[this->control_widget->current_method]);
+       // this->control_widget->box_for_calculation->show();
 
         if (this->series_10)
         {
+            this->result_10->files_path = this->result_path;
+           // this->control_widget->files_path.emplace(this->control_widget->current_method,this->result_path);
             this->result_10->image_remove();
             this->result_10->current_series = 0;
             this->result_10->max_series = -1;
@@ -90,16 +97,6 @@ public:
                 }
             }
 
-            this->result_10->files_path = this->result_path;
-
-            for (int i{ this->result_10->max_series + 1 }; i < 9; i++)
-            {
-
-                this->result_10->series_labels[i].setText("EMPTY");
-                this->result_10->series_labels[i].setStyleSheet("background-color: white; border : 2px solid red;");
-             
-            }
-
             if (this->division > 0)
             {
                 this->average_way = this->average_way / this->division;
@@ -117,7 +114,8 @@ public:
         }
         else
         {
-            
+            this->result_1->files_path = this->result_path;
+          //  this->control_widget->files_path.emplace(this->control_widget->current_method, this->result_path);
             this->result_1->image_reamove();
 
             for (size_t i{ 0 }; i < 3; i++)
@@ -133,7 +131,7 @@ public:
                
                 this->average_way = execute->nodes[this->end[2]][this->end[0]][this->end[1]].real;
             }
-            this->result_1->files_path = this->result_path;
+            
             this->result_1->image_reload();
         }
     }

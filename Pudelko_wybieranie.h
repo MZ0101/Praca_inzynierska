@@ -4,9 +4,9 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
-#include "E://Inzynierka_2//Label.h"
-#include "E://Inzynierka_2//LineEdit.h"
-#include "E://Inzynierka_2//Buttons.h"
+#include "Label.h"
+#include "LineEdit.h"
+#include "Buttons.h"
 
 class Pudelko_wybieranie : public QGroupBox
 {

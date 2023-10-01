@@ -3,8 +3,7 @@
 Glowna_klasa::Glowna_klasa(QObject* parent) : QObject(parent)
 {
     this->control_widget = new WidgetsControl();
-    this->widget = new Begin_Widget();
-
+ 
     QObject::connect(&this->control_widget->buttons[0], &QPushButton::clicked, [&]() {
 
         this->screen(this->control_widget);
@@ -17,10 +16,9 @@ Glowna_klasa::Glowna_klasa(QObject* parent) : QObject(parent)
 
         });
 
-    QObject::connect(&this->widget->button_1, &QPushButton::clicked, this, &Glowna_klasa::check_checkbox);
-  
-    this->control_widget->widget_array[0] = this->widget;
-    this->control_widget->vertical->addWidget(this->control_widget->widget_array[0]);
+    QObject::connect(&this->control_widget->begin_widget->button_1, &QPushButton::clicked, this, &Glowna_klasa::check_checkbox);
+   // QObject::connect(&this->control_widget->buttons_box[0], &QPushButton::clicked, this, &Glowna_klasa::check_checkbox);
+
     this->screen(this->control_widget);
     this->control_widget->show();
 
@@ -51,7 +49,7 @@ void Glowna_klasa::check_checkbox()
         this->screen(this->mark);
     }
 
-    if (this->widget->check_1[0].isChecked())
+    if (this->control_widget->begin_widget->check_1[0].isChecked())
     {
         this->series_1_ch();
     }
@@ -60,7 +58,7 @@ void Glowna_klasa::check_checkbox()
         this->series_10_ch();
     }
 
-    this->widget->hide();
+    this->control_widget->begin_widget->hide();
     this->control_widget->current_widget++;
     this->control_widget->vertical->removeWidget(this->control_widget->widget_array[0]);
     this->control_widget->vertical->addWidget(this->control_widget->widget_array[1]);
@@ -72,24 +70,27 @@ void Glowna_klasa::check_checkbox()
 void Glowna_klasa::obliczenia()
 {
    
-    if (this->widget->check_2[0].isChecked())
+    if (this->control_widget->begin_widget->check_2[0].isChecked())
     {
         this->result_path += "//Result_D";
+     //   this->control_widget->current_method = 0;
         A_01* wykonanie = new A_01;
         this->common_calculations(wykonanie);
         delete wykonanie;
     }
-    else if (this->widget->check_2[1].isChecked())
+    else if (this->control_widget->begin_widget->check_2[1].isChecked())
     {
         this->result_path += "//Result_T";
+      //  this->control_widget->current_method = 1;
         A_02* wykonanie = new A_02;
         this->common_calculations(wykonanie);
         delete wykonanie;
     }
 
-    else if (this->widget->check_2[2].isChecked())
+    else if (this->control_widget->begin_widget->check_2[2].isChecked())
     {
         this->result_path += "//Result_E";
+      //  this->control_widget->current_method = 2;
         A_03* wykonanie = new A_03;
         this->common_calculations(wykonanie);
         delete wykonanie;
@@ -178,7 +179,7 @@ void Glowna_klasa::result_1_create()
     this->control_widget->vertical->removeWidget(this->control_widget->widget_array[1]);
     this->control_widget->vertical->addWidget(this->control_widget->widget_array[2]);
 
-    this->result_1->files_path = this->result_path;
+    //this->result_1->files_path = this->result_path;
     this->obliczenia();
   
     this->series_1->hide();
@@ -201,9 +202,8 @@ void Glowna_klasa::result_10_create()
     this->control_widget->vertical->removeWidget(this->control_widget->widget_array[1]);
     this->control_widget->vertical->addWidget(this->control_widget->widget_array[2]);
 
-    this->result_10->files_path = this->result_path +"//Series_";
-
     this->obliczenia();
+    this->result_path += "//Series_";
 
     this->series_10->hide();
     this->result_10->show();
@@ -248,6 +248,20 @@ void Glowna_klasa::mark_connect()
     }
 }
 
+//void Glowna_klasa::for_control_widget_method()
+//{
+//
+//    if (qobject_cast<Buttons*>(sender()) == &this->control_widget->buttons_box[1])
+//    {
+//        this->control_widget->previous_method();
+//    }
+//    else
+//    {
+//        this->control_widget->another_method();
+//    }
+//
+//}
+
 Glowna_klasa::~Glowna_klasa()
 {
     if (mark) delete mark;
@@ -255,7 +269,7 @@ Glowna_klasa::~Glowna_klasa()
     if (result_1) delete result_1;
     if (series_10) delete series_10;
     if (result_10) delete result_10;
-    if (widget) delete widget;
+    //if (widget) delete widget;
 
     if (control_widget) delete control_widget;
 }
