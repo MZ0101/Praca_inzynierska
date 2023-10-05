@@ -1,11 +1,15 @@
 #**Inzynierka_2 - Projekt Analizy Mikrostruktury Elektrod SOFC**
-#Opis
+
+#**Opis**
+
 Projekt "Inzynierka_2" został stworzony w celu znajdowania najkrótszych ścieżek w analizie mikrostruktury elektrod ogniw paliwowych typu SOFC (stałotlenkowych ogniw paliwowych). Program wykorzystuje algorytmy Dijkstry i A* oraz bibliotekę Qt, aby efektywnie przetwarzać obrazy w formacie .BMP. Ponadto, biblioteka Qt została użyta do stworzenia prostego interfejsu użytkownika.
 
 #**Opis Obrazów**
+
 Obrazy, na których program działa, mają wymiary 200x200 pikseli, co można traktować jako graf pikseli. Piksele na obrazach występują w kolorach czarnym, białym lub różnych odcieniach szarości. Obecnie algorytm działa w taki sposób, że jeśli piksel jest biały, to przez ten obszar może przejść cząsteczka wodoru. Aby uruchomić algorytm, użytkownik musi wybrać punkt początkowy i końcowy, czyli numer obrazu oraz współrzędne piksela. Współrzędne można wprowadzić z klawiatury lub wybrać za pomocą narzędzia zaznaczania, co ułatwia wybór obrazu i punktów na obrazie. Program umożliwia także wybór liczby zestawów współrzędnych, na których ma działać algorytm - użytkownik może wybrać jeden lub dziesięć zestawów. W przypadku wyboru dziesięciu zestawów danych zostanie również obliczona średnia kosztu drogi.
 
 #**Przetwarzanie Obrazów**
+
 Program przetwarza obrazy, a wyniki działania algorytmu są wizualizowane na obrazach. Piksele o kolorach niebieskich symbolizują odwiedzone piksele, piksele zielone reprezentują ścieżkę, a piksele czerwone oznaczają punkty początkowe i końcowe.
 
 **Rodzaje Wyszukiwania Najkrótszej Ścieżki**
