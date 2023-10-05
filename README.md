@@ -25,6 +25,3 @@ Wybór Folderu z Danymi: Dodać możliwość wyboru folderu z danymi do przetwor
 Nawigacja po Wynikach: Umożliwienie użytkownikowi przeglądania wyników przetwarzania w różnych zestawach danych.
 Wybór Kryterium Wyszukiwania: Pozwolić użytkownikowi wybierać kryterium wyszukiwania ścieżki z poziomu interfejsu użytkownika.
 Instalator: Utworzyć instalator, który ułatwi innym użytkownikom instalację programu.
-
-
-
