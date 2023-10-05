@@ -22,10 +22,10 @@ Na chwilę obecną program oferuje trzy różne kryteria wyszukiwania najkrótsz
 ## **Możliwe Rozszerzenia**
 Projekt można rozwijać, dodając nowe funkcje:
 
--**Dodanie Dodatkowych Algorytmów:** Można dodać więcej algorytmów wyszukiwania ścieżki, aby dać użytkownikowi więcej opcji.
--**Optymalizacja:** Można zoptymalizować działanie programu, aby działał jeszcze szybciej i bardziej efektywnie.
--**Zapis Wyników:** Dodanie funkcji zapisywania wyników działania algorytmu bezpośrednio do pliku .xlsx lub .txt, co ułatwi analizę wyników.
--**Wybór Folderu z Danymi:** Dodać możliwość wyboru folderu z danymi do przetworzenia.
--**Nawigacja po Wynikach:** Umożliwienie użytkownikowi przeglądania wyników przetwarzania w różnych zestawach danych.
--**Wybór Kryterium Wyszukiwania:** Pozwolić użytkownikowi wybierać kryterium wyszukiwania ścieżki z poziomu interfejsu użytkownika.
--**Instalator:** Utworzyć instalator, który ułatwi innym użytkownikom instalację programu.
+-**Dodanie Dodatkowych Algorytmów:** Można dodać więcej algorytmów wyszukiwania ścieżki, aby dać użytkownikowi więcej opcji.  
+-**Optymalizacja:** Można zoptymalizować działanie programu, aby działał jeszcze szybciej i bardziej efektywnie.  
+-**Zapis Wyników:** Dodanie funkcji zapisywania wyników działania algorytmu bezpośrednio do pliku .xlsx lub .txt, co ułatwi analizę wyników.  
+-**Wybór Folderu z Danymi:** Dodać możliwość wyboru folderu z danymi do przetworzenia.  
+-**Nawigacja po Wynikach:** Umożliwienie użytkownikowi przeglądania wyników przetwarzania w różnych zestawach danych.  
+-**Wybór Kryterium Wyszukiwania:** Pozwolić użytkownikowi wybierać kryterium wyszukiwania ścieżki z poziomu interfejsu użytkownika.  
+-**Instalator:** Utworzyć instalator, który ułatwi innym użytkownikom instalację programu.  
