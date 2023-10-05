@@ -1,25 +1,30 @@
-# Inzynierka_2
-Projekt służy do znajdowania najkrótszej ścieżki w analizie mikrostruktury elektrod ogniw paliwowych typu SOFC. 
-Do określenia najkrutrzej sciezki zastosowano algorytm Dikstry oraz A*, ponadto wykożystano biblioteke Qt w celu sprawnejszego przetwarzania obrazów w formacie .BMP.
-Biblioteke Qt wykożystano również do późniejszego opracowania prostego interfejsu.
+Inzynierka_2 - Projekt Analizy Mikrostruktury Elektrod SOFC
+Opis
+Projekt "Inzynierka_2" został stworzony w celu znajdowania najkrótszych ścieżek w analizie mikrostruktury elektrod ogniw paliwowych typu SOFC (stałotlenkowych ogniw paliwowych). Program wykorzystuje algorytmy Dijkstry i A* oraz bibliotekę Qt, aby efektywnie przetwarzać obrazy w formacie .BMP. Ponadto, biblioteka Qt została użyta do stworzenia prostego interfejsu użytkownika.
 
-Obrazy , na którch program pracuje posiadają wymiar 200x200 pikseli, czyli w zasadze jest to graf pikseli. Obrazy zostały uprzednio przygotowane w wyniku czego pkslese posiadają kolory czarne, białe lub odcenie szarości. 
-Obecnie algorytm dział tak, że jeżeli tylko piksel jest biały to czasteczka wodoru może przejść tą drogą. Aby algorytm rozpoczą pracę należy wybrac punkt począdkowy oraz końcowy, czyli numer obrazu oraz współżędne piksela.
-Współżędne mozna wpisać z klawaitury lub wybrac opcję zaznaczania spowoduje to, że będze można wybrać obraz oraz zaznaczyć współżędne piksela za pomocą myszki. Program posiada opcję wyboru na ilu zestawach współżędnych ma pracować, jeden lub dziesięć.
-W przypadku wyboru dzisięciu zestawów danych zostanie rówaniez obliczona średnia kosztu drogi. 
-Na końcu można przejżeć rezultaty działania algorytmu, obrazy które zostały przetworzone zostają zapisane. Piksele o kolorach niebieskich symbolizują odwiedzony piksel, piksele zielone ścierzkę natomiast czerwone współżędne startowe oraz końcowe. 
+Opis Obrazów
+Obrazy, na których program działa, mają wymiary 200x200 pikseli, co można traktować jako graf pikseli. Piksele na obrazach występują w kolorach czarnym, białym lub różnych odcieniach szarości. Obecnie algorytm działa w taki sposób, że jeśli piksel jest biały, to przez ten obszar może przejść cząsteczka wodoru. Aby uruchomić algorytm, użytkownik musi wybrać punkt początkowy i końcowy, czyli numer obrazu oraz współrzędne piksela. Współrzędne można wprowadzić z klawiatury lub wybrać za pomocą narzędzia zaznaczania, co ułatwia wybór obrazu i punktów na obrazie. Program umożliwia także wybór liczby zestawów współrzędnych, na których ma działać algorytm - użytkownik może wybrać jeden lub dziesięć zestawów. W przypadku wyboru dziesięciu zestawów danych zostanie również obliczona średnia kosztu drogi.
 
-Na chwilę obecną algorytm oferuje wyszukiwanie najkrótszej ścieżki na trzy sposoby, uwzględniając trzy różne kryteria:
-- koszt dojścia do wierzchołka (algorytm dikstry)
-- suma kosztu dojscia do wierzchołka oraz odległości estymowanej, która w tym przypadku jest odległoscią eukleidesową (algorytm A*)
-- odległość eukleidesowa (algorytm A*)
+Przetwarzanie Obrazów
+Program przetwarza obrazy, a wyniki działania algorytmu są wizualizowane na obrazach. Piksele o kolorach niebieskich symbolizują odwiedzone piksele, piksele zielone reprezentują ścieżkę, a piksele czerwone oznaczają punkty początkowe i końcowe.
 
-Wyżej wymienione sposoby wyszukiwania najkrutrzej ścieżki różnia się dokładnością oraz czasem wykoanania, wyszukiwanie najkrutrzej ścierzki bazując na algorytmie dikstry jest najbardziej dokładne oraz czasochłonne.
-Natomiast wyszukiwanie poprzez odległośc eukleidesowa jest najmniej dokładną metodą ale najszybszą, może na przykład posłużyc do określenia czy jest możlwie znalezienie scierzki.
+Rodzaje Wyszukiwania Najkrótszej Ścieżki
+Na chwilę obecną program oferuje trzy różne kryteria wyszukiwania najkrótszej ścieżki:
 
-Ogólne rzecz ujmując możliwe jest rozbudowanie programu o:
-- zapis wyników jego działąnia bezpośrednio w pliku .xlsx lub posrednio porzez plik .txt, następnie okreslenie najlepszego sposobu wyszukiwania najkrutrzej ścierzki przez analize wyników działania algorytmu.
-- wybór folderu z danymi.
-- wybór sposbu 
+-Koszt Dojścia do Wierzchołka (Algorytm Dijkstry): Algorytm ten zapewnia najbardziej dokładne wyniki, ale może być czasochłonny.
+-Koszt Dojścia + Odległość Euklidesowa (Algorytm A):* Ten tryb uwzględnia koszt dojścia do wierzchołka oraz odległość estymowaną, która jest obliczana jako odległość euklidesowa. Jest to kompromis między dokładnością a wydajnością.
+-Odległość Euklidesowa (Algorytm A):* Ten tryb jest najszybszy, ale nie zawsze daje najbardziej dokładne wyniki. Może być używany do ogólnego sprawdzenia możliwości znalezienia ścieżki.
+
+Możliwe Rozszerzenia
+Projekt można rozwijać, dodając nowe funkcje lub ulepszając istniejące. Oto kilka sugestii:
+
+Dodanie Dodatkowych Algorytmów: Można dodać więcej algorytmów wyszukiwania ścieżki, aby dać użytkownikowi więcej opcji.
+Optymalizacja: Można zoptymalizować działanie programu, aby działał jeszcze szybciej i bardziej efektywnie.
+Zapis Wyników: Dodanie funkcji zapisywania wyników działania algorytmu bezpośrednio do pliku .xlsx lub .txt, co ułatwi analizę wyników.
+Wybór Folderu z Danymi: Dodać możliwość wyboru folderu z danymi do przetworzenia.
+Nawigacja po Wynikach: Umożliwienie użytkownikowi przeglądania wyników przetwarzania w różnych zestawach danych.
+Wybór Kryterium Wyszukiwania: Pozwolić użytkownikowi wybierać kryterium wyszukiwania ścieżki z poziomu interfejsu użytkownika.
+Instalator: Utworzyć instalator, który ułatwi innym użytkownikom instalację programu.
+
 
 
