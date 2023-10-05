@@ -16,24 +16,16 @@ Program przetwarza obrazy, a wyniki działania algorytmu są wizualizowane na ob
 Na chwilę obecną program oferuje trzy różne kryteria wyszukiwania najkrótszej ścieżki:
 
 -Koszt Dojścia do Wierzchołka (Algorytm Dijkstry): Algorytm ten zapewnia najbardziej dokładne wyniki, ale może być czasochłonny.
-
 -Koszt Dojścia + Odległość Euklidesowa (Algorytm A):* Ten tryb uwzględnia koszt dojścia do wierzchołka oraz odległość estymowaną, która jest obliczana jako odległość euklidesowa. Jest to kompromis między dokładnością a wydajnością.
-
 -Odległość Euklidesowa (Algorytm A):* Ten tryb jest najszybszy, ale nie zawsze daje najbardziej dokładne wyniki. Może być używany do ogólnego sprawdzenia możliwości znalezienia ścieżki.
 
 ## **Możliwe Rozszerzenia**
 Projekt można rozwijać, dodając nowe funkcje:
 
-Dodanie Dodatkowych Algorytmów: Można dodać więcej algorytmów wyszukiwania ścieżki, aby dać użytkownikowi więcej opcji.
-
-Optymalizacja: Można zoptymalizować działanie programu, aby działał jeszcze szybciej i bardziej efektywnie.
-
-Zapis Wyników: Dodanie funkcji zapisywania wyników działania algorytmu bezpośrednio do pliku .xlsx lub .txt, co ułatwi analizę wyników.
-
-Wybór Folderu z Danymi: Dodać możliwość wyboru folderu z danymi do przetworzenia.
-
-Nawigacja po Wynikach: Umożliwienie użytkownikowi przeglądania wyników przetwarzania w różnych zestawach danych.
-
-Wybór Kryterium Wyszukiwania: Pozwolić użytkownikowi wybierać kryterium wyszukiwania ścieżki z poziomu interfejsu użytkownika.
-
-Instalator: Utworzyć instalator, który ułatwi innym użytkownikom instalację programu.
+-**Dodanie Dodatkowych Algorytmów:** Można dodać więcej algorytmów wyszukiwania ścieżki, aby dać użytkownikowi więcej opcji.
+-**Optymalizacja:** Można zoptymalizować działanie programu, aby działał jeszcze szybciej i bardziej efektywnie.
+-**Zapis Wyników:** Dodanie funkcji zapisywania wyników działania algorytmu bezpośrednio do pliku .xlsx lub .txt, co ułatwi analizę wyników.
+-**Wybór Folderu z Danymi:** Dodać możliwość wyboru folderu z danymi do przetworzenia.
+-**Nawigacja po Wynikach:** Umożliwienie użytkownikowi przeglądania wyników przetwarzania w różnych zestawach danych.
+-**Wybór Kryterium Wyszukiwania:** Pozwolić użytkownikowi wybierać kryterium wyszukiwania ścieżki z poziomu interfejsu użytkownika.
+-**Instalator:** Utworzyć instalator, który ułatwi innym użytkownikom instalację programu.
