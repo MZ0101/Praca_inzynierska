@@ -24,7 +24,9 @@ Projekt można rozwijać, dodając nowe funkcje:
 
 - Można dodać więcej algorytmów wyszukiwania ścieżki, aby dodac więcej opcji użytkownikowi.<br>
 - Dodanie funkcji zapisywania wyników działania algorytmu bezpośrednio do pliku .xlsx lub .txt, co ułatwi analizę wyników.<br>
+- Kontrola wielkości okien w programie w zależności od rozdzielczości wyświetlacza.
 - Umożliwienie użytkownikowi przeglądania wyników przetwarzania w różnych zestawach danych.<br>
-- Pozwolić użytkownikowi wybierać kryterium wyszukiwania ścieżki z poziomu preglądu rezultatów.<br>
+- Pozwolić użytkownikowi wybierać kryterium wyszukiwania ścieżki z poziomu przeglądu rezultatów.<br>
 - Utworzyć instalator, który ułatwi innym użytkownikom instalację programu.<br>
 - Można zoptymalizować działanie programu.<br>
+
