@@ -31,6 +31,8 @@ Result_10::Result_10(QWidget* parent) : QWidget(parent)
 	
 	this->main_result = new Result_1(this, this->files_path + "0");
 	this->main_result->image_reload();
+	this->main_result->image_name.setFixedWidth(400);
+	//this->zmiana();
 	this->main_result->main_layout.removeItem(&this->main_result->hlayout);
 	this->main_result->result.hide();
 
@@ -62,30 +64,30 @@ void Result_10::andother()
 inline void Result_10::zmiana()
 {
 	this->main_result->current_image_index = 0;
-	//this->main_result->files_path = this->files_path + QString::number(this->series_array[this->current_series]);
-	this->main_result->files_path = this->files_path + QString::number(this->current_series);
+	this->main_result->files_path = this->files_path + QString::number(this->series_array[this->current_series]);
 	this->main_result->dir.setPath(this->main_result->files_path);
-	this->main_result->image_name.setFixedWidth(400);
+	
 	this->main_result->files_path += "//";
 
 	this->main_result->files_list.clear();
 	this->main_result->files_list = this->main_result->dir.entryList(QDir::Files);
+	
 
 	if (this->main_result->files_list.size() > 0)
 	{
 		this->main_result->max_image_index = this->main_result->files_list.size() - 1;
+		
 		this->main_result->processing();
 		this->main_result->image_name.setText("Image name: " + this->main_result->files_list[this->main_result->current_image_index]);
+	}
+	else
+	{
+		this->main_result->image_name.setText("Image name: Empty");
 	}
 	this->series_labels[this->current_series].setStyleSheet("background-color: white; border : 2px solid green; font-weight: bold;");
 
 
-	for (int i{ this->max_series + 1 }; i < 9; i++)
-	{
-
-		this->series_labels[i].setText("EMPTY");
-		this->series_labels[i].setStyleSheet("background-color: white; border : 2px solid red;");
-	}
+	
 
 }
 

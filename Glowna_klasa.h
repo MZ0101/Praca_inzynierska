@@ -37,8 +37,7 @@ public:
     int division = { 0 };
     float average_way = { 0.0 };
 
-    QString result_path;
-
+    QString way_calculation;
 
     void check_checkbox();
     void obliczenia();
@@ -56,6 +55,7 @@ public:
     template <class T>
     void common_calculations(T* execute)
     {
+        
         this->division = 0;
         this->average_way = 0;
        // this->control_widget->method_label_box->setText("Method: " + this->control_widget->method_label[this->control_widget->current_method]);
@@ -63,9 +63,9 @@ public:
 
         if (this->series_10)
         {
-            this->result_path += "//Seria_";
-            this->result_10->files_path = this->result_path;
-            qDebug() << this->result_path;
+
+            this->result_10->files_path = "Result_10//"+ this->way_calculation +"//Seria_";
+           
            // this->control_widget->files_path.emplace(this->control_widget->current_method,this->result_path);
             this->result_10->image_remove();
             this->result_10->current_series = 0;
@@ -86,7 +86,7 @@ public:
                 {
                     value = 0.0;
 
-                    execute->result_path = this->result_path + QString::number(i);
+                    execute->result_path = "Result_10//" + this->way_calculation + "//Seria_" + QString::number(i);
                     execute->Executive();
 
                     value = execute->nodes[this->end[2]][this->end[0]][this->end[1]].real;
@@ -111,13 +111,19 @@ public:
             {
                 this->result_10->series_labels[10].setText("EMPTY");
                 this->result_10->series_labels[10].setStyleSheet("background-color: white; border : 2px solid red;");
-                this->result_10->buttons[0].setEnabled(false);
-                this->result_10->buttons[1].setEnabled(false);
+                //this->result_10->buttons[0].setEnabled(false);
+                //this->result_10->buttons[1].setEnabled(false);
+            }
+            for (int i{ this->result_10->max_series + 1 }; i < 9; i++)
+            {
+
+                this->result_10->series_labels[i].setText("EMPTY");
+                this->result_10->series_labels[i].setStyleSheet("background-color: white; border : 2px solid red;");
             }
         }
         else
         {
-            this->result_1->files_path = this->result_path;
+            this->result_1->files_path = "Result_1//" + this->way_calculation;
           //  this->control_widget->files_path.emplace(this->control_widget->current_method, this->result_path);
             this->result_1->image_reamove();
 
@@ -129,7 +135,7 @@ public:
 
             if (execute->reload(this->begin, this->end))
             {
-                execute->result_path = this->result_path;
+                execute->result_path = "Result_1//" + this->way_calculation;
                 execute->Executive();
                
                 this->average_way = execute->nodes[this->end[2]][this->end[0]][this->end[1]].real;

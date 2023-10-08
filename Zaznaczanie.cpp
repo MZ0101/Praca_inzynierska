@@ -2,9 +2,10 @@
 
 Zaznaczanie::Zaznaczanie(QWidget *parent) : QWidget(parent)  
 {
-    this->dir.setPath(this->path);
+    
+    this->dir.setPath("Dane");
     this->files_list = this->dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
-    this->files_list.erase(this->files_list.begin());
+   // this->files_list.erase(this->files_list.begin());
     this->size = this->files_list.size()-1;
 
     this->path += "//";
@@ -28,9 +29,9 @@ Zaznaczanie::Zaznaczanie(QWidget *parent) : QWidget(parent)
         QObject::connect(&(this->boxs[0].buttons[i]), &QPushButton::clicked, this, functions[i]);
         QObject::connect(&(this->boxs[1].buttons[i]), &QPushButton::clicked, this, functions[i+2]);
 
-        this->image[i].load(this->path + this->files_list[0]);
+        this->image[i].load(this->path + this->files_list[1]);
         this->boxs[i].label_image->setPixmap(QPixmap::fromImage(this->image[i]).scaled(QSize(800, 800), Qt::KeepAspectRatio));
-        this->boxs[i].files_name->setText(this->files_list[0]);
+        this->boxs[i].files_name->setText(this->files_list[1]);
         
         this->horisontal->addWidget(&this->boxs[i]);
     }

@@ -4,8 +4,8 @@ Result_1::Result_1(QWidget* parent , QString path) : QWidget(parent)
 {
     this->files_path = path;
 
-    this->setFocus();
-    this->setFocusPolicy(Qt::StrongFocus);
+   /* this->setFocus();
+    this->setFocusPolicy(Qt::StrongFocus);*/
 
     this->hlayout.addWidget(&this->result);
     this->hlayout.setAlignment(&this->result, Qt::AlignHCenter);
@@ -140,6 +140,7 @@ void Result_1::image_reamove()
 
 void Result_1::image_reload()
 {
+    this->current_image_index = 0;
     this->dir.setPath(this->files_path);
     this->files_path += "//";
 
@@ -153,7 +154,7 @@ void Result_1::image_reload()
 
         this->image_view.scene_v.addPixmap(QPixmap::fromImage(this->image).scaled(800, 800));
         this->image_name.setText("Image name : " + this->files_list[this->current_image_index]);
-
+        
 
         this->result.setStyleSheet("background-color: white; border: 2px solid green; font-weight: bold;");
        

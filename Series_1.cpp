@@ -26,7 +26,7 @@ Series_1::Series_1(QWidget *parent) : QWidget(parent)
 void Series_1::removed_files()
 {
 	QDir dir{};
-	QStringList files_list = {};
+	QStringList files_list;
 	dir.setPath(this->path);
 	this->path += "//";
 

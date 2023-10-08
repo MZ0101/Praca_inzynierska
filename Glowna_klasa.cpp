@@ -41,8 +41,8 @@ void Glowna_klasa::check_checkbox()
 {
     this->control_widget->buttons[0].setEnabled(true);
     this->control_widget->buttons[1].setEnabled(false);
-    
-    if (!this->mark)
+  
+    if (this->mark == nullptr)
     {
         this->mark = new Zaznaczanie();
         QObject::connect(this->mark->button, &QPushButton::clicked, this, &Glowna_klasa::mark_connect);
@@ -72,7 +72,7 @@ void Glowna_klasa::obliczenia()
    
     if (this->control_widget->begin_widget->check_2[0].isChecked())
     {
-        this->result_path += "//Result_D";
+        this->way_calculation = "//Result_D";
      //   this->control_widget->current_method = 0;
         A_01* wykonanie = new A_01;
         this->common_calculations(wykonanie);
@@ -80,7 +80,7 @@ void Glowna_klasa::obliczenia()
     }
     else if (this->control_widget->begin_widget->check_2[1].isChecked())
     {
-        this->result_path += "//Result_T";
+        this->way_calculation = "//Result_T";
       //  this->control_widget->current_method = 1;
         A_02* wykonanie = new A_02;
         this->common_calculations(wykonanie);
@@ -89,7 +89,7 @@ void Glowna_klasa::obliczenia()
 
     else if (this->control_widget->begin_widget->check_2[2].isChecked())
     {
-        this->result_path += "//Result_E";
+        this->way_calculation = "//Result_E";
       //  this->control_widget->current_method = 2;
         A_03* wykonanie = new A_03;
         this->common_calculations(wykonanie);
@@ -100,8 +100,6 @@ void Glowna_klasa::obliczenia()
 
 void Glowna_klasa::series_1_ch()
 {
-    this->result_path = "Result_1";
-
     if (this->series_10)
     {
         delete this->series_10;
@@ -115,6 +113,7 @@ void Glowna_klasa::series_1_ch()
     {
         this->series_1 = new Series_1();
         this->control_widget->buttons[0].setEnabled(true);
+        
 
         QObject::connect(&this->series_1->buttons[0], &QPushButton::clicked, this, [this]() {
 
@@ -132,8 +131,7 @@ void Glowna_klasa::series_1_ch()
 
 void Glowna_klasa::series_10_ch()
 {
-    this->result_path = "Result_10";
-
+    
     if (this->series_1)
     {
         delete this->series_1;
@@ -146,7 +144,6 @@ void Glowna_klasa::series_10_ch()
     if (this->series_10 == nullptr)
     {
         this->series_10 = new Series_10();
-
         this->control_widget->buttons[0].setEnabled(true);
 
 
@@ -195,6 +192,7 @@ void Glowna_klasa::result_10_create()
     {
         this->result_10 = new Result_10();
         this->control_widget->widget_array[2] = this->result_10;
+       // this->result_path += "//Seria_";
     }
 
     this->control_widget->current_widget++;
@@ -202,7 +200,7 @@ void Glowna_klasa::result_10_create()
     this->control_widget->vertical->addWidget(this->control_widget->widget_array[2]);
 
     this->obliczenia();
-    this->result_path += "//Series_";
+    
 
     this->series_10->hide();
     this->result_10->show();
