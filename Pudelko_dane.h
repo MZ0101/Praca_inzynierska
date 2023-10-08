@@ -1,11 +1,11 @@
 #pragma once
 
-#include "E://Inzynierka_2//Label.h"
-#include "E://Inzynierka_2//Buttons.h"
+#include "Label.h"
+#include "Buttons.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGroupBox>
-#include "E://Inzynierka_2//LineEdit.h"
+#include "LineEdit.h"
 
 
 class Pudelko_dane : public QGroupBox

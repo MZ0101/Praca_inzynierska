@@ -62,7 +62,8 @@ void Result_10::andother()
 inline void Result_10::zmiana()
 {
 	this->main_result->current_image_index = 0;
-	this->main_result->files_path = this->files_path + QString::number(this->series_array[this->current_series]);
+	//this->main_result->files_path = this->files_path + QString::number(this->series_array[this->current_series]);
+	this->main_result->files_path = this->files_path + QString::number(this->current_series);
 	this->main_result->dir.setPath(this->main_result->files_path);
 	this->main_result->image_name.setFixedWidth(400);
 	this->main_result->files_path += "//";

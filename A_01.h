@@ -194,7 +194,7 @@ template<class T>
 			
 			    if (!this->nodes_queue.empty())
 			    {
-			        for (size_t i = 0; i < n; i++)
+			        for (size_t i = this->begin.z; i < n; i++)
 			        {
 			            //QString filename = QString("testy_%1.bmp").arg(i, 4, 10, QChar('0'));
 			            this->image[i].save(this->result_path + "//" + QString("testy_%1.bmp").arg(i, 4, 10, QChar('0')));

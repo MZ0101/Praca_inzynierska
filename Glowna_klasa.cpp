@@ -30,7 +30,7 @@ void Glowna_klasa::screen(QWidget* widget)
     QScreen* primaryScreen = QGuiApplication::primaryScreen();
 
     QRect screenRect = primaryScreen->geometry();
-
+    //qDebug() << screenRect.width() << "::::" << screenRect.height();
     int screenWidth = screenRect.width();
     int screenHeight = screenRect.height();
 
@@ -191,7 +191,6 @@ void Glowna_klasa::result_1_create()
 
 void Glowna_klasa::result_10_create()
 {
-
     if (this->result_10 == nullptr)
     {
         this->result_10 = new Result_10();

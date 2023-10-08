@@ -114,22 +114,6 @@ inline void Result_1::processing()
     this->pixmapItem->setPixmap(QPixmap::fromImage(this->image.scaled(800, 800)));
 }
 
-//void Result_1::if_empty()
-//{
-//    this->scene = this->image_view.scene();
-//    this->pixmapItem = dynamic_cast<QGraphicsPixmapItem*>(scene->items().first());
-//
-//    this->image_name.setText("Image name: Empty");
-//    this->image_name.setStyleSheet("background-color: white; border : 2px solid red;");
-//
-//    this->image.load("Result_1//empty.jpg");
-//   // this->image = this->image.scaled(QSize(800, 800), Qt::KeepAspectRatio);
-//
-//    //this->scene->setSceneRect(0, 0, 800, 800);
-//    this->image = this->image.scaled(QSize(800, 800), Qt::KeepAspectRatio);
-//    this->pixmapItem->setPixmap(QPixmap::fromImage(this->image.scaled(800, 800)));
-//}
-
 void Result_1::image_reamove()
 {
 #include <QFile>
@@ -139,7 +123,6 @@ void Result_1::image_reamove()
     QDir dir{};
     QStringList files_list = {};
 
-   
         files_path = this->files_path;
         files_path = files_path ;
         dir.setPath(files_path);
@@ -151,16 +134,12 @@ void Result_1::image_reamove()
         for (const QString& file_name : files_list)
         {
             QFile file(dir.filePath(file_name));
-
             file.remove();
-
-        
     }
 }
 
 void Result_1::image_reload()
 {
-
     this->dir.setPath(this->files_path);
     this->files_path += "//";
 

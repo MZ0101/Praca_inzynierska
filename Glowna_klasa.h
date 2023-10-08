@@ -63,12 +63,15 @@ public:
 
         if (this->series_10)
         {
+            this->result_path += "//Seria_";
             this->result_10->files_path = this->result_path;
+            qDebug() << this->result_path;
            // this->control_widget->files_path.emplace(this->control_widget->current_method,this->result_path);
             this->result_10->image_remove();
             this->result_10->current_series = 0;
             this->result_10->max_series = -1;
             float value{ 0.0 };
+
 
             //T* wykonanie_total = new T();
             for (size_t i{ 0 }; i < 10; i++)

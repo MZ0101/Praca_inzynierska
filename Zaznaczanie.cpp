@@ -46,7 +46,7 @@ Zaznaczanie::Zaznaczanie(QWidget *parent) : QWidget(parent)
     this->vertical->addLayout(this->horisontal);
     
     this->setLayout(this->vertical);
-    this->setWindowFlags(this->windowFlags() & ~Qt::WindowMaximizeButtonHint);
+    //this->setWindowFlags(this->windowFlags() & ~Qt::WindowMaximizeButtonHint);
 }
 
 void Zaznaczanie::previous_l()
