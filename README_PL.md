@@ -22,7 +22,7 @@ Na chwilę obecną program oferuje trzy różne kryteria wyszukiwania najkrótsz
 ## **Możliwe Rozszerzenia**
 Projekt można rozwijać, dodając nowe funkcje:
 
-- Można dodać więcej algorytmów wyszukiwania ścieżki, aby dodac więcej opcji użytkownikowi.<br>
+- Można dodać więcej algorytmów wyszukiwania ścieżki, aby dodać więcej opcji użytkownikowi.<br>
 - Dodanie funkcji zapisywania wyników działania algorytmu bezpośrednio do pliku .xlsx lub .txt, co ułatwi analizę wyników.<br>
 - Kontrola wielkości okien w programie w zależności od rozdzielczości wyświetlacza.
 - Umożliwienie użytkownikowi przeglądania wyników przetwarzania w różnych zestawach danych.<br>
