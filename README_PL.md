@@ -1,4 +1,4 @@
-# **Projekt Analizy Mikrostruktury Elektrod SOFC**
+# **Projekt analizy mikrostruktury elektrod ogniw paliwowych typu SOFC (Solid Oxide Fuel Cell)**
 
 ## **Opis**
    
