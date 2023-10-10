@@ -16,7 +16,7 @@ The image-based program resulting from the algorithm is visualized in images. Bl
 ## **Types of Shortest Path Search**
 Currently, the program offers three different search criteria for the shortest source:
 
-- Cost to Reach the Vertex (Dijkstra's Algorithm): This algorithm provides the best results, but may be ruddery.<br>
+- Cost to Reach the Vertex (Dijkstra's Algorithm): This algorithm provides the best results, but may be time-consuming.<br>
 - Access Cost + Euclidean Far (Algorithm A):* This mode tracks the cost of reaching the vertex and the estimated distance, which is calculated as the Euclidean distance. This is consistent between observed and performance.<br>
 - Far Euclidean (Algorithm A):* This mode is active, but does not always produce the most detailed results. Can be used to check search capabilities in general.<br>
 
