@@ -2,7 +2,7 @@
 
 ## **Opis**
    
-Projekt został stworzony w celu znalezienia najkrótszych ścierzek  w mikrostrukturach elektrod ogniw paliwowych typu SOFC (stałotlenkowych ogniw paliwowych). Program wykorzystuje algorytmy Dijkstry i A* oraz bibliotekę Qt, aby przetworzyć obrazy o rozszerzeniu .BMP. Dodatkowo, biblioteka Qt została użyta do tworzenia prostego interfejsu użytkownika.
+Projekt został stworzony w celu znalezienia najkrótszych ścieżek  w mikrostrukturach elektrod ogniw paliwowych typu SOFC (stało tlenkowych ogniw paliwowych). Program wykorzystuje algorytmy Dijkstry i A* oraz bibliotekę Qt, aby przetworzyć obrazy o rozszerzeniu .BMP. Dodatkowo, biblioteka Qt została użyta do tworzenia prostego interfejsu użytkownika.
 
 ## **Opis Obrazów**
 
