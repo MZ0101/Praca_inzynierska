@@ -1,4 +1,4 @@
-# **SOFC Electrode Microstructure Analysis Project**
+# **Project of microstructure analysis of SOFC (Solid Oxide Fuel Cell) fuel cell electrodes.**
 
 ## **Description**
 The project was created to search for the shortest wipes in the microstructures of SOFC fuel cells (solid oxide fuel cells). 
