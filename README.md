@@ -11,14 +11,14 @@ The images on which the program works have dimensions of 200x200 pixels, which c
 
 ## **Image Processing**
 
-The image-based program resulting from the algorithm is visualized in images. Blue pixels represent visited pixels, green pixels represent primary pixels, and red pixels represent starting and starting points.
+The image-based program resulting from the algorithm is visualized in images. Blue pixels represent visited pixels, green pixels represent the shortest path, and red pixels represent starting and starting points.
 
 ## **Types of Shortest Path Search**
 Currently, the program offers three different search criteria for the shortest source:
 
 - Cost to Reach the Vertex (Dijkstra's Algorithm): This algorithm provides the best results, but may be time-consuming.<br>
-- Access Cost + Euclidean Far (Algorithm A):* This mode tracks the cost of reaching the vertex and the estimated distance, which is calculated as the Euclidean distance. This is consistent between observed and performance.<br>
-- Far Euclidean (Algorithm A):* This mode is active, but does not always produce the most detailed results. Can be used to check search capabilities in general.<br>
+- Actual Cost + Euclidean Distance (Algorithm A):* This mode tracks the cost to reach the vertex and the estimated distance, which is calculated as Euclidean distance. It is slightly less accurate than Dikstra's algorithm, but on average half as fast.<br>
+- Far Euclidean (Algorithm A):* This mode is the fastest, but always produces the most inaccurate results. It can be used to check whether a shortest path exists.<br>
 
 ## **Possible Extensions**
 The project can be developed by adding new features:
