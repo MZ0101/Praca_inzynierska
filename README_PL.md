@@ -16,8 +16,8 @@ Program przetwarza obrazy, a wyniki działania algorytmu są wizualizowane na ob
 Na chwilę obecną program oferuje trzy różne kryteria wyszukiwania najkrótszej ścieżki:
 
 - Koszt Dojścia do Wierzchołka (Algorytm Dijkstry): Algorytm ten zapewnia najbardziej dokładne wyniki, ale może być czasochłonny.<br>
-- Koszt Dojścia + Odległość Euklidesowa (Algorytm A):* Ten tryb uwzględnia koszt dojścia do wierzchołka oraz odległość estymowaną, która jest obliczana jako odległość euklidesowa. Jest to kompromis między dokładnością a wydajnością.<br>
-- Odległość Euklidesowa (Algorytm A):* Ten tryb jest najszybszy, ale nie zawsze daje najbardziej dokładne wyniki. Może być używany do ogólnego sprawdzenia możliwości znalezienia ścieżki.<br>
+- Koszt Dojścia + Odległość Euklidesowa (Algorytm A*): Ten tryb uwzględnia koszt dojścia do wierzchołka oraz odległość estymowaną, która jest obliczana jako odległość euklidesowa. Jest to kompromis między dokładnością a wydajnością.<br>
+- Odległość Euklidesowa (Algorytm A*): Ten tryb jest najszybszy, ale nie zawsze daje najbardziej dokładne wyniki. Może być używany do ogólnego sprawdzenia możliwości znalezienia ścieżki.<br>
 
 ## **Możliwe Rozszerzenia**
 Projekt można rozwijać, dodając nowe funkcje:
