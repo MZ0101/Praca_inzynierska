@@ -4,16 +4,16 @@
 #include <QDir>
 #include <QScreen>
 #include <QMouseEvent>
-#include "Pudelko_wybieranie.h"
+#include "Box_for_mark.h"
 
 
-class Zaznaczanie : public QWidget
+class Mark : public QWidget
 {
     Q_OBJECT
 
 public:
-    Zaznaczanie(QWidget *parent = nullptr);
-    ~Zaznaczanie(); 
+    Mark(QWidget *parent = nullptr);
+    ~Mark();
     // alokacja statyczna
     QImage image[2];
 
@@ -25,7 +25,7 @@ public:
    
 
     // alokacja dynamiczna
-    Pudelko_wybieranie *boxs = nullptr;
+    Box_for_mark* boxs = nullptr;
     Buttons* button = nullptr;
     QHBoxLayout* b_horisontal = nullptr;
     
@@ -36,11 +36,10 @@ protected:
     
     bool eventFilter(QObject* object, QEvent* event) override;
 
-
     protected slots:
         void previous_r();
         void another_r();
         void previous_l();
         void another_l();
-        void if_z_value_changet();
+        void if_z_value_changed();
 };

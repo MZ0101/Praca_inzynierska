@@ -1,6 +1,6 @@
-#include "Pudelko_wybieranie.h"
+#include "Box_for_mark.h"
 
-Pudelko_wybieranie::Pudelko_wybieranie(QWidget* parent) : QGroupBox(parent)
+Box_for_mark::Box_for_mark(QWidget* parent) : QGroupBox(parent)
 {
 	
 	this->setAlignment(Qt::AlignHCenter);
@@ -48,7 +48,7 @@ Pudelko_wybieranie::Pudelko_wybieranie(QWidget* parent) : QGroupBox(parent)
 	this->setAlignment(Qt::AlignCenter);
 }
 
-Pudelko_wybieranie::~Pudelko_wybieranie() 
+Box_for_mark::~Box_for_mark()
 {
 	delete files_name;
 	delete label_image;

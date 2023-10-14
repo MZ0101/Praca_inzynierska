@@ -2,9 +2,8 @@
 
 #include <QFile>
 #include <QDir>
-
 #include "Buttons.h"
-#include "Pudelko.h"
+#include "Box_for_1_series.h"
 
 class Series_1 : public QWidget
 {
@@ -17,8 +16,8 @@ public:
       Buttons buttons[2];
       QHBoxLayout box_group;
       QHBoxLayout button_group;
-      Pudelko right_box;
-      Pudelko left_box;
+      Box_for_1_series right_box;
+      Box_for_1_series left_box;
 
       QString path = { "Result_1//Result_D" };
 

@@ -8,12 +8,12 @@
 #include "LineEdit.h"
 #include "Buttons.h"
 
-class Pudelko_wybieranie : public QGroupBox
+class Box_for_mark : public QGroupBox
 {
 public:
 	//Pudelko_wybieranie(QWidget* parent = nullptr);
-	Pudelko_wybieranie(QWidget *parent = nullptr);
-	~Pudelko_wybieranie();
+	Box_for_mark(QWidget *parent = nullptr);
+	~Box_for_mark();
 
 	Label *files_name = nullptr;
 	Label *label_image = nullptr;

@@ -29,10 +29,7 @@
     <QtUic Include="Glowna_klasa.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtMoc Include="Glowna_klasa.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <ClCompile Include="Glowna_klasa.cpp">
+    <ClCompile Include="Mian_class.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -55,13 +52,13 @@
     <ClCompile Include="Control_Widget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pudelko.cpp">
+    <ClCompile Include="Box_for_1_series.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pudelko_dane.cpp">
+    <ClCompile Include="Box_for_10_series.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pudelko_wybieranie.cpp">
+    <ClCompile Include="Box_for_mark.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Result_1.cpp">
@@ -79,30 +76,24 @@
     <ClCompile Include="View.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Zaznaczanie.cpp">
+    <ClCompile Include="Mark.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="A_01.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Label.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LineEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pudelko_dane.h">
+    <ClInclude Include="Box_for_1_series.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pudelko_wybieranie.h">
+    <ClInclude Include="Box_for_10_series.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="View.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Pudelko.h">
+    <ClInclude Include="Box_for_mark.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Result_10.h">
@@ -111,21 +102,30 @@
     <ClInclude Include="Series_10.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="View.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="A_01.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Buttons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Control_Widget.h">
+    <QtMoc Include="Main_class.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Result_1.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Series_1.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Zaznaczanie.h">
+    <QtMoc Include="Mark.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Result_1.h">
+    <QtMoc Include="Control_Widget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

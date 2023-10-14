@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Pudelko_dane.h"
+#include "Box_for_10_series.h"
 
 class Series_10 : public QWidget
 {
@@ -9,7 +9,7 @@ public:
 
     Series_10(QWidget *partent = nullptr);
     ~Series_10();
-    Pudelko_dane *boxs_data = nullptr;
+    Box_for_10_series *boxs_data = nullptr;
     QVBoxLayout *verticals = nullptr;
     Buttons *button_clicked = nullptr;
 
@@ -23,7 +23,6 @@ public:
     float average_way = { 0.0 };
 
 private:
-    void zaznaczanie_button(Buttons* button_clicked);
-    //void obliczenia();
+    void mark_button(Buttons* button_clicked);
 };
 

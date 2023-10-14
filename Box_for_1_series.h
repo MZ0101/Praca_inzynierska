@@ -1,18 +1,18 @@
 #pragma once
-#include <qgroupbox.h>
 
 #include "Label.h"
 #include "LineEdit.h"
 #include <QHBoxLayout>
 #include <QKeyEvent>
 #include <QVBoxLayout>
+#include <QGroupBox>
 
-class Pudelko : public QGroupBox
+class Box_for_1_series : public QGroupBox
 {
 	
 public:
-	Pudelko(QWidget* parent = nullptr, QString title = "default");
-	~Pudelko();
+	Box_for_1_series(QWidget* parent = nullptr, QString title = "default");
+	~Box_for_1_series();
 
 	Label* label = nullptr;
 	LineEdit* edit = nullptr;

@@ -46,7 +46,7 @@ void Result_10::previous()
 	{
 		this->series_labels[this->current_series].setStyleSheet("background-color: white; border : 2px solid grey;");
 		this->current_series--;
-		this->zmiana();	
+		this->image_change();
 	}
 }
 void Result_10::andother()
@@ -56,10 +56,10 @@ void Result_10::andother()
 		this->series_labels[this->current_series].setStyleSheet("background-color: white; border : 2px solid grey;");
 		this->current_series++;
 
-		this->zmiana();
+		this->image_change();
 	}
 }
-inline void Result_10::zmiana()
+inline void Result_10::image_change()
 {
 	this->main_result->current_image_index = 0;
 	this->main_result->files_path = this->files_path + QString::number(this->series_array[this->current_series]);

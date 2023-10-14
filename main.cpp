@@ -1,10 +1,10 @@
-#include "Glowna_klasa.h"
+#include "Main_class.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Glowna_klasa w;
+    Main_class w;
 
     return a.exec();
 }

@@ -1,6 +1,6 @@
-#include "Zaznaczanie.h"
+#include "Mark.h"
 
-Zaznaczanie::Zaznaczanie(QWidget *parent) : QWidget(parent)  
+Mark::Mark(QWidget *parent) : QWidget(parent)
 {
     this->dir.setPath(this->path);
     this->files_list = this->dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
@@ -11,9 +11,9 @@ Zaznaczanie::Zaznaczanie(QWidget *parent) : QWidget(parent)
     
     QString boxs_namse[2] = { "Begining","End" };
 
-    void(Zaznaczanie:: * functions[4]) () = { &Zaznaczanie::previous_l, &Zaznaczanie::another_l,&Zaznaczanie::previous_r, &Zaznaczanie::another_r};
+    void(Mark:: * functions[4]) () = { &Mark::previous_l, &Mark::another_l,&Mark::previous_r, &Mark::another_r};
 
-    this->boxs = new Pudelko_wybieranie[2];
+    this->boxs = new Box_for_mark[2];
     //this->boxs = new Pudelko_wybieranie[2];
 
     this->horisontal = new QHBoxLayout();
@@ -23,7 +23,7 @@ Zaznaczanie::Zaznaczanie(QWidget *parent) : QWidget(parent)
         this->boxs[i].setTitle(boxs_namse[i]);
         this->boxs[i].label_image->installEventFilter(this);
         this->boxs[i].label_image->setMouseTracking(true);
-        QObject::connect(&this->boxs[i].edit[2], SIGNAL(textChanged(const QString&)), this, SLOT(if_z_value_changet()));
+        QObject::connect(&this->boxs[i].edit[2], SIGNAL(textChanged(const QString&)), this, SLOT(if_z_value_changed()));
 
         QObject::connect(&(this->boxs[0].buttons[i]), &QPushButton::clicked, this, functions[i]);
         QObject::connect(&(this->boxs[1].buttons[i]), &QPushButton::clicked, this, functions[i+2]);
@@ -49,7 +49,7 @@ Zaznaczanie::Zaznaczanie(QWidget *parent) : QWidget(parent)
     this->setWindowFlags(this->windowFlags() & ~Qt::WindowMaximizeButtonHint);
 }
 
-void Zaznaczanie::previous_l()
+void Mark::previous_l()
 {
     if (this->current_l > 0)
     {
@@ -58,7 +58,7 @@ void Zaznaczanie::previous_l()
         this->boxs[0].edit[2].setText(QString::number(this->current_l));
     }
 }
-void Zaznaczanie::another_l()
+void Mark::another_l()
 {
     if (this->current_l < this->current_r)
     {
@@ -67,7 +67,7 @@ void Zaznaczanie::another_l()
         //this->process(this->current_l, 0);
     }
 }
-void Zaznaczanie::previous_r()
+void Mark::previous_r()
 {
     if (this->current_r > this->current_l)
     {
@@ -76,7 +76,7 @@ void Zaznaczanie::previous_r()
         this->boxs[1].edit[2].setText(QString::number(this->current_r));
     }
 }
-void Zaznaczanie::another_r()
+void Mark::another_r()
 {
     if (this->current_r < this->size)
     {
@@ -88,53 +88,47 @@ void Zaznaczanie::another_r()
 
 
 
-bool Zaznaczanie::eventFilter(QObject* object, QEvent* event)
+bool Mark::eventFilter(QObject* object, QEvent* event)
 {
     if ((this->boxs[0].label_image == object || this->boxs[1].label_image == object) && event->type() == QEvent::MouseButtonPress)
     {
         QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
-        int number{0};
+        int box_number{0};
         int x = mouse_event->x();
         int y = mouse_event->y();
         for (size_t i{ 0 }; i < 2; i++)
         {
             if (this->boxs[i].label_image == object)
             {
-                number = i;
+                box_number = i;
             }
         }
-        QImage image = this->boxs[number].label_image->pixmap().toImage();
+        QImage image = this->boxs[box_number].label_image->pixmap().toImage();
 
         QColor current_p = image.pixelColor(x, y);
 
         if (current_p.red() == 255 && current_p.blue() == 255 && current_p.green() == 255)
         {
-            int x_ory = static_cast<int>(static_cast<double>(x*200 / 800));
-            int y_ory = static_cast<int>(static_cast<double>(y*200 / 800 ));
+            int x_original = static_cast<int>(static_cast<double>(x*200 / 800));
+            int y_original = static_cast<int>(static_cast<double>(y*200 / 800 ));
            
-            image = this->image[number].copy();
-            this->boxs[number].edit[0].setText(QString::number(x_ory));
-            this->boxs[number].edit[1].setText(QString::number(y_ory));
+            image = this->image[box_number].copy();
+            this->boxs[box_number].edit[0].setText(QString::number(x_original));
+            this->boxs[box_number].edit[1].setText(QString::number(y_original));
 
-            //Czarny
-            //image.setColor(0, qRgb(0, 0, 0)); na bia³y jest autoamtyczne ustwaione  i na czarny
-            //Bia³y
-            //image.setColor(1, qRgb(255, 255, 255));
-            
             //Czerwony
             image.setColor(2, qRgb(255, 0, 0));
 
-            image.setPixel(x_ory,y_ory, 2);
-            this->boxs[number].label_image->setPixmap(QPixmap());
+            image.setPixel(x_original,y_original, 2);
+            this->boxs[box_number].label_image->setPixmap(QPixmap());
             
-
-            this->boxs[number].label_image->setPixmap(QPixmap::fromImage(image).scaled(QSize(800,800), Qt::KeepAspectRatio));
+            this->boxs[box_number].label_image->setPixmap(QPixmap::fromImage(image).scaled(QSize(800,800), Qt::KeepAspectRatio));
         }
     }
     return QWidget::eventFilter(object, event);
 }
 
-void Zaznaczanie::if_z_value_changet()
+void Mark::if_z_value_changed()
 {
     QObject *obiect_send = sender();
     int z_value{ 0 };
@@ -173,7 +167,7 @@ void Zaznaczanie::if_z_value_changet()
     
 }
 
-Zaznaczanie::~Zaznaczanie()
+Mark::~Mark()
 {
     delete [] boxs;
     delete  horisontal;

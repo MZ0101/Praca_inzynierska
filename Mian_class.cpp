@@ -1,6 +1,6 @@
-#include "Glowna_klasa.h"
+#include "Main_class.h"
 
-Glowna_klasa::Glowna_klasa(QObject* parent) : QObject(parent)
+Main_class::Main_class(QObject* parent) : QObject(parent)
 {
     this->control_widget = new WidgetsControl();
  
@@ -16,7 +16,7 @@ Glowna_klasa::Glowna_klasa(QObject* parent) : QObject(parent)
 
         });
 
-    QObject::connect(&this->control_widget->begin_widget->button_1, &QPushButton::clicked, this, &Glowna_klasa::check_checkbox);
+    QObject::connect(&this->control_widget->begin_widget->button_1, &QPushButton::clicked, this, &Main_class::check_checkbox);
    // QObject::connect(&this->control_widget->buttons_box[0], &QPushButton::clicked, this, &Glowna_klasa::check_checkbox);
 
     this->screen(this->control_widget);
@@ -24,7 +24,7 @@ Glowna_klasa::Glowna_klasa(QObject* parent) : QObject(parent)
 
 }
 
-void Glowna_klasa::screen(QWidget* widget)
+void Main_class::screen(QWidget* widget)
 {
     widget->adjustSize();
     QScreen* primaryScreen = QGuiApplication::primaryScreen();
@@ -37,15 +37,15 @@ void Glowna_klasa::screen(QWidget* widget)
     widget->move((screenWidth - widget->width()) / 2, (screenHeight - widget->height()) / 2);
 }
 
-void Glowna_klasa::check_checkbox()
+void Main_class::check_checkbox()
 {
     this->control_widget->buttons[0].setEnabled(true);
     this->control_widget->buttons[1].setEnabled(false);
     
     if (!this->mark)
     {
-        this->mark = new Zaznaczanie();
-        QObject::connect(this->mark->button, &QPushButton::clicked, this, &Glowna_klasa::mark_connect);
+        this->mark = new Mark();
+        QObject::connect(this->mark->button, &QPushButton::clicked, this, &Main_class::mark_connect);
         this->screen(this->mark);
     }
 
@@ -67,7 +67,7 @@ void Glowna_klasa::check_checkbox()
 
 }
 
-void Glowna_klasa::obliczenia()
+void Main_class::obliczenia()
 {
    
     if (this->control_widget->begin_widget->check_2[0].isChecked())
@@ -98,7 +98,7 @@ void Glowna_klasa::obliczenia()
    
 }
 
-void Glowna_klasa::series_1_ch()
+void Main_class::series_1_ch()
 {
     this->result_path = "Result_1";
 
@@ -123,14 +123,14 @@ void Glowna_klasa::series_1_ch()
 
             });
 
-        QObject::connect(&this->series_1->buttons[1], &QPushButton::clicked, this, &Glowna_klasa::result_1_create);
+        QObject::connect(&this->series_1->buttons[1], &QPushButton::clicked, this, &Main_class::result_1_create);
 
     }
 
     this->control_widget->widget_array[1] = this->series_1;
 }
 
-void Glowna_klasa::series_10_ch()
+void Main_class::series_10_ch()
 {
     this->result_path = "Result_10";
 
@@ -159,13 +159,13 @@ void Glowna_klasa::series_10_ch()
                 });
         }
 
-        QObject::connect(this->series_10->button_clicked, &QPushButton::clicked, this, &Glowna_klasa::result_10_create);
+        QObject::connect(this->series_10->button_clicked, &QPushButton::clicked, this, &Main_class::result_10_create);
     }
    
     this->control_widget->widget_array[1] = this->series_10;
 }
 
-void Glowna_klasa::result_1_create()
+void Main_class::result_1_create()
 {
 
     if (this->result_1 == nullptr)
@@ -189,7 +189,7 @@ void Glowna_klasa::result_1_create()
     this->result_1->result.setText("Result: " + QString::number(this->average_way));
 }
 
-void Glowna_klasa::result_10_create()
+void Main_class::result_10_create()
 {
 
     if (this->result_10 == nullptr)
@@ -202,16 +202,16 @@ void Glowna_klasa::result_10_create()
     this->control_widget->vertical->removeWidget(this->control_widget->widget_array[1]);
     this->control_widget->vertical->addWidget(this->control_widget->widget_array[2]);
 
+    
     this->obliczenia();
-    this->result_path += "//Series_";
-
+   
     this->series_10->hide();
     this->result_10->show();
 
     this->screen(this->control_widget);
 }
 
-void Glowna_klasa::mark_connect()
+void Main_class::mark_connect()
 {
     if (this->mark->boxs[0].edit[2].text().toInt() > this->mark->boxs[1].edit[2].text().toInt())
     {
@@ -262,7 +262,7 @@ void Glowna_klasa::mark_connect()
 //
 //}
 
-Glowna_klasa::~Glowna_klasa()
+Main_class::~Main_class()
 {
     if (mark) delete mark;
     if (series_1) delete series_1;

@@ -1,6 +1,6 @@
-#include "Pudelko.h"
+#include "Box_for_1_series.h"
 
-Pudelko::Pudelko(QWidget* parent, QString title) :QGroupBox(parent)
+Box_for_1_series::Box_for_1_series(QWidget* parent, QString title) :QGroupBox(parent)
 {
 	this->setTitle(title);
 	this->setFocusPolicy(Qt::StrongFocus);
@@ -32,12 +32,12 @@ Pudelko::Pudelko(QWidget* parent, QString title) :QGroupBox(parent)
 
 }
 
-void Pudelko::mousePressEvent(QMouseEvent* evet)
+void Box_for_1_series::mousePressEvent(QMouseEvent* evet)
 {
 	this->edit[currentLineEdit].setFocus();
 }
 
-void Pudelko::keyPressEvent(QKeyEvent* event)
+void Box_for_1_series::keyPressEvent(QKeyEvent* event)
 {
 	if (event->key() == Qt::Key_Up)
 	{
@@ -49,7 +49,7 @@ void Pudelko::keyPressEvent(QKeyEvent* event)
 	}
 }
 
-void Pudelko::UpFocus()
+void Box_for_1_series::UpFocus()
 {
 	if (currentLineEdit > 0)
 	{
@@ -63,7 +63,7 @@ void Pudelko::UpFocus()
 	this->edit[currentLineEdit].setFocus();
 }
 
-void Pudelko::DownFocus()
+void Box_for_1_series::DownFocus()
 {
 	if (currentLineEdit < 2)
 	{
@@ -78,7 +78,7 @@ void Pudelko::DownFocus()
 
 }
 
-Pudelko::~Pudelko()
+Box_for_1_series::~Box_for_1_series()
 {
 	delete[] label;
 	delete[] edit;

@@ -90,21 +90,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Control_Widget.cpp" />
-    <ClCompile Include="Pudelko.cpp" />
-    <ClCompile Include="Pudelko_dane.cpp" />
-    <ClCompile Include="Pudelko_wybieranie.cpp" />
+    <ClCompile Include="Box_for_1_series.cpp" />
+    <ClCompile Include="Box_for_10_series.cpp" />
+    <ClCompile Include="Box_for_mark.cpp" />
     <ClCompile Include="Result_1.cpp" />
     <ClCompile Include="Result_10.cpp" />
     <ClCompile Include="Series_1.cpp" />
     <ClCompile Include="Series_10.cpp" />
     <ClCompile Include="View.cpp" />
-    <ClCompile Include="Zaznaczanie.cpp" />
+    <ClCompile Include="Mark.cpp" />
     <QtRcc Include="Glowna_klasa.qrc" />
     <QtUic Include="Glowna_klasa.ui" />
-    <QtMoc Include="Glowna_klasa.h" />
+    <QtMoc Include="Main_class.h" />
     <ClCompile Include="A_01.cpp" />
     <ClCompile Include="Buttons.cpp" />
-    <ClCompile Include="Glowna_klasa.cpp" />
+    <ClCompile Include="Mian_class.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="LineEdit.cpp" />
     <ClCompile Include="main.cpp" />
@@ -114,14 +114,14 @@
     <ClInclude Include="Buttons.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="LineEdit.h" />
-    <ClInclude Include="Pudelko.h" />
-    <ClInclude Include="Pudelko_dane.h" />
-    <ClInclude Include="Pudelko_wybieranie.h" />
+    <ClInclude Include="Box_for_1_series.h" />
+    <ClInclude Include="Box_for_10_series.h" />
+    <ClInclude Include="Box_for_mark.h" />
     <ClInclude Include="Result_10.h" />
     <ClInclude Include="Series_10.h" />
     <QtMoc Include="Result_1.h" />
     <ClInclude Include="View.h" />
-    <QtMoc Include="Zaznaczanie.h" />
+    <QtMoc Include="Mark.h" />
     <QtMoc Include="Series_1.h" />
     <QtMoc Include="Control_Widget.h" />
   </ItemGroup>

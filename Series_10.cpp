@@ -1,7 +1,7 @@
 #include "Series_10.h"
 Series_10::Series_10(QWidget* parent) : QWidget(parent)
 {
-    this->boxs_data = new Pudelko_dane[10];
+    this->boxs_data = new Box_for_10_series[10];
     this->horisontal_mian = new QHBoxLayout();
     this->horisontal_mian->setAlignment(Qt::AlignCenter);
     //this->vertical_main = new QVBoxLayout();
@@ -24,7 +24,7 @@ Series_10::Series_10(QWidget* parent) : QWidget(parent)
             this->verticals[1].addWidget(&this->boxs_data[i]);
         }
 
-        QObject::connect(this->boxs_data[i].button, &QPushButton::clicked, [this, i]() {Series_10::zaznaczanie_button(this->boxs_data[i].button); });
+        QObject::connect(this->boxs_data[i].button, &QPushButton::clicked, [this, i]() {Series_10::mark_button(this->boxs_data[i].button); });
 
     }
 
@@ -39,7 +39,7 @@ Series_10::Series_10(QWidget* parent) : QWidget(parent)
     this->setLayout(&this->vertical_main);
 }
 
-void Series_10::zaznaczanie_button(Buttons* button_clicked)
+void Series_10::mark_button(Buttons* button_clicked)
 {
     this->hide();
     for (size_t i{ 0 }; i < 10; i++)
@@ -58,5 +58,4 @@ Series_10::~Series_10()
 	delete button_clicked;
 	delete[] verticals;
     delete horisontal_mian;
-
 }

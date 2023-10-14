@@ -1,9 +1,8 @@
 #pragma once
 
 #include "Buttons.h"
-#include "Pudelko.h"
 #include "View.h"
-
+#include "Label.h"
 #include <QDir>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -35,14 +34,13 @@ public:
     QHBoxLayout hlayout;
     QHBoxLayout main_hlayout;
 
-    double scaled_image{ 800.0 };
+    float scaled_image{ 800.0 };
     QImage image;
     int current_image_index{ 0 };
     int max_image_index{ 0 };
 
     inline void processing();
     void image_reload();
-   // void if_empty();
     void image_reamove();
 
 protected:

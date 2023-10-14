@@ -1,6 +1,6 @@
-#include "Pudelko_dane.h"
+#include "Box_for_10_series.h"
 
-Pudelko_dane::Pudelko_dane(QWidget* parent) : QGroupBox(parent)
+Box_for_10_series::Box_for_10_series(QWidget* parent) : QGroupBox(parent)
 {
     this->button = new Buttons;
     this->b_vertical = new QVBoxLayout();
@@ -45,7 +45,7 @@ Pudelko_dane::Pudelko_dane(QWidget* parent) : QGroupBox(parent)
     this->main_horisontal->setAlignment(this->button,Qt::AlignHCenter);
 }
 
-Pudelko_dane::~Pudelko_dane()
+Box_for_10_series::~Box_for_10_series()
 {
     delete  button;
     delete[] horizontal;

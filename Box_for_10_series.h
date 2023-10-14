@@ -1,19 +1,19 @@
 #pragma once
 
-#include "E://Inzynierka_2//Label.h"
-#include "E://Inzynierka_2//Buttons.h"
+#include "Label.h"
+#include "Buttons.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGroupBox>
-#include "E://Inzynierka_2//LineEdit.h"
+#include "LineEdit.h"
 
 
-class Pudelko_dane : public QGroupBox
+class Box_for_10_series : public QGroupBox
 {
     
 public:
-    Pudelko_dane(QWidget* parent = nullptr);
-    ~Pudelko_dane();
+    Box_for_10_series(QWidget* parent = nullptr);
+    ~Box_for_10_series();
 
     Buttons* button = nullptr;
    
@@ -28,7 +28,4 @@ public:
     QVBoxLayout* vertical = nullptr;
     QVBoxLayout* b_vertical = nullptr;
    
-
-
 };
-
