@@ -4,7 +4,7 @@
 #include "Series_10.h"
 #include "Result_10.h"
 #include "Mark.h"
-#include "A_01.h"
+#include "SearchAlgorithm.h"
 #include "Control_Widget.h"
 
 #include <QScreen>
@@ -51,8 +51,8 @@ public:
  
    // void for_control_widget_method();
 
-    template <class current_algorithm>
-    void common_calculations(current_algorithm* execute)
+    template <class Current_algorithm>
+    void common_calculations(Current_algorithm* execute)
     {
         this->division = 0;
         this->average_way = 0;

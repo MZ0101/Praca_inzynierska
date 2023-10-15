@@ -1,6 +1,6 @@
-﻿#include "A_01.h"
+﻿#include "SearchAlgorithm.h"
 
-bool A_00::Reload(int* begin, int* end)
+bool Algorithm_base::Reload(int* begin, int* end)
 {
 	this->end.x = end[0];
 	this->end.y = end[1];
@@ -64,7 +64,7 @@ bool A_00::Reload(int* begin, int* end)
 	return true;
 }
 
-void A_00::Executive() {
+void Algorithm_base::Executive() {
 	while (!(this->queue_top.x == this->end.x && this->queue_top.y == this->end.y && this->queue_top.z == this->end.z))
 	{
 		if (this->nodes_queue.empty()) { return; }
@@ -145,7 +145,7 @@ void A_00::Executive() {
 	delete[] images;
 };
 
-void A_01::Nodes_calculation(int dz, int dx, int dy, float dreal)
+void Algorithm_dijkstra::Nodes_calculation(int dz, int dx, int dy, float dreal)
 {
 	int x = this->queue_top.x + dx;
 	int y = this->queue_top.y + dy;
@@ -173,7 +173,7 @@ void A_01::Nodes_calculation(int dz, int dx, int dy, float dreal)
 
 //#############################################################
 
-void A_02::Nodes_calculation(int dz, int dx, int dy, float dreal)
+void Algorithm_total::Nodes_calculation(int dz, int dx, int dy, float dreal)
 {
 	int x = this->queue_top.x + dx;
 	int y = this->queue_top.y + dy;
@@ -205,7 +205,7 @@ void A_02::Nodes_calculation(int dz, int dx, int dy, float dreal)
 }
 
 //#############################################################
-void A_03::Nodes_calculation(int dz, int dx, int dy, float dreal)
+void Algorithm_euclidean::Nodes_calculation(int dz, int dx, int dy, float dreal)
 {
 	int x = this->queue_top.x + dx;
 	int y = this->queue_top.y + dy;

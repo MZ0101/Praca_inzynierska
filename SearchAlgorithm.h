@@ -24,11 +24,11 @@ public:
 	}
 };
 
-class A_00
+class Algorithm_base
 {
 public:
 
-	A_00()
+	Algorithm_base()
 	{
 		QDir folder_data("Dane");
 		file_path = folder_data.absolutePath();
@@ -38,7 +38,7 @@ public:
 		files.erase(files.begin());
 	};
 
-	~A_00() {};
+	~Algorithm_base() {};
 
 	int choice_calculation{ 0 };
 	QRgb pixel_color;
@@ -66,27 +66,27 @@ public:
 	bool Reload(int* begin, int* end);
 };
 
-class A_01 :public A_00
+class Algorithm_dijkstra :public Algorithm_base
 {
 public:
-	A_01() :A_00() {};
+	Algorithm_dijkstra() :Algorithm_base() {};
 
 	virtual void Nodes_calculation(int dz, int dx, int dy, float dreal) override;
 };
 
-class A_02 :public A_00
+class Algorithm_total :public Algorithm_base
 {
 public:
 
-	A_02() :A_00() {};
+	Algorithm_total() :Algorithm_base() {};
 	virtual void Nodes_calculation(int dz, int dx, int dy, float dreal) override;
 };
 
-class A_03 : public A_00
+class Algorithm_euclidean : public Algorithm_base
 {
 public:
 
-	A_03() :A_00() {};
+	Algorithm_euclidean() :Algorithm_base() {};
 
 	virtual void Nodes_calculation(int dz, int dx, int dy, float dreal) override;
 };

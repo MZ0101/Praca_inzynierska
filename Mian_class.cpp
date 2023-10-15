@@ -74,26 +74,26 @@ void Main_class::obliczenia()
     {
         this->result_path += "//Result_D";
      //   this->control_widget->current_method = 0;
-        A_01* wykonanie = new A_01;
-        this->common_calculations(wykonanie);
-        delete wykonanie;
+        Algorithm_dijkstra* execute = new  Algorithm_dijkstra;
+        this->common_calculations(execute);
+        delete  execute;
     }
     else if (this->control_widget->begin_widget->check_2[1].isChecked())
     {
         this->result_path += "//Result_T";
       //  this->control_widget->current_method = 1;
-        A_02* wykonanie = new A_02;
-        this->common_calculations(wykonanie);
-        delete wykonanie;
+        Algorithm_total* execute = new Algorithm_total;
+        this->common_calculations(execute);
+        delete  execute;
     }
 
     else if (this->control_widget->begin_widget->check_2[2].isChecked())
     {
         this->result_path += "//Result_E";
       //  this->control_widget->current_method = 2;
-        A_03* wykonanie = new A_03;
-        this->common_calculations(wykonanie);
-        delete wykonanie;
+        Algorithm_euclidean* execute = new Algorithm_euclidean;
+        this->common_calculations(execute);
+        delete  execute;
     }
    
 }
@@ -248,20 +248,6 @@ void Main_class::mark_connect()
     }
 }
 
-//void Glowna_klasa::for_control_widget_method()
-//{
-//
-//    if (qobject_cast<Buttons*>(sender()) == &this->control_widget->buttons_box[1])
-//    {
-//        this->control_widget->previous_method();
-//    }
-//    else
-//    {
-//        this->control_widget->another_method();
-//    }
-//
-//}
-
 Main_class::~Main_class()
 {
     if (mark) delete mark;
@@ -269,7 +255,6 @@ Main_class::~Main_class()
     if (result_1) delete result_1;
     if (series_10) delete series_10;
     if (result_10) delete result_10;
-    //if (widget) delete widget;
-
+   
     if (control_widget) delete control_widget;
 }

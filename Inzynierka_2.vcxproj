@@ -102,7 +102,7 @@
     <QtRcc Include="Glowna_klasa.qrc" />
     <QtUic Include="Glowna_klasa.ui" />
     <QtMoc Include="Main_class.h" />
-    <ClCompile Include="A_01.cpp" />
+    <ClCompile Include="SearchAlgorithm.cpp" />
     <ClCompile Include="Buttons.cpp" />
     <ClCompile Include="Mian_class.cpp" />
     <ClCompile Include="Label.cpp" />
@@ -110,7 +110,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="A_01.h" />
+    <ClInclude Include="SearchAlgorithm.h" />
     <ClInclude Include="Buttons.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="LineEdit.h" />
