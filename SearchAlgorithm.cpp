@@ -13,24 +13,24 @@ bool Algorithm_base::Reload(int* begin, int* end)
 
 	this->images = new QImage[this->images_number];
 
-	for (size_t i{ 0 }; i < this->images_number; i++)
+	for (size_t z{ 0 }; z < this->images_number; z++)
 	{
-		this->images[i] = QImage(file_path + files[i]);
+		this->images[z] = QImage(file_path + files[z]);
 
 		this->pixel_color = qRgb(0, 0, 0);
-		this->images[i].setColor(0, this->pixel_color);
+		this->images[z].setColor(0, this->pixel_color);
 
 		//Bia³y
 		this->pixel_color = qRgb(255, 255, 255);
-		this->images[i].setColor(1, this->pixel_color);
+		this->images[z].setColor(1, this->pixel_color);
 
 		//Niebieski
 		this->pixel_color = qRgb(0, 0, 255);
-		this->images[i].setColor(2, this->pixel_color);
+		this->images[z].setColor(2, this->pixel_color);
 
 		//Zielony
 		this->pixel_color = qRgb(0, 255, 0);
-		this->images[i].setColor(3, this->pixel_color);
+		this->images[z].setColor(3, this->pixel_color);
 	}
 
 	QRgb value_begin = this->images[this->end.z].color(this->images[this->end.z].pixelIndex(this->end.x, this->end.y));
@@ -68,38 +68,38 @@ void Algorithm_base::Executive() {
 	while (!(this->queue_top.x == this->end.x && this->queue_top.y == this->end.y && this->queue_top.z == this->end.z))
 	{
 		if (this->nodes_queue.empty()) { return; }
-		this->queue_top.x = nodes_queue.top().x;
 
+		this->queue_top.x = nodes_queue.top().x;
 		this->queue_top.y = nodes_queue.top().y;
 		this->queue_top.z = nodes_queue.top().z;
 
 		this->queue_top.real = nodes_queue.top().real;
 		this->nodes_queue.pop();
 
-		for (int i{ 0 }; i < 2; i++)
+		for (size_t z{ 0 }; z < 2; z++)
 		{
-			this->Nodes_calculation(i, 1, 0, 1.0);
+			this->Nodes_calculation(z, 1, 0, 1.0);
 
 
-			this->Nodes_calculation(i, 0, 1, 1.0);
+			this->Nodes_calculation(z, 0, 1, 1.0);
 
 
-			this->Nodes_calculation(i, -1, 0, 1.0);
+			this->Nodes_calculation(z, -1, 0, 1.0);
 
 
-			this->Nodes_calculation(i, 0, -1, 1.0);
+			this->Nodes_calculation(z, 0, -1, 1.0);
 
 
-			this->Nodes_calculation(i, 1, 1, 1.41);
+			this->Nodes_calculation(z, 1, 1, 1.41);
 
 
-			this->Nodes_calculation(i, -1, -1, 1.41);
+			this->Nodes_calculation(z, -1, -1, 1.41);
 
 
-			this->Nodes_calculation(i, 1, -1, 1.41);
+			this->Nodes_calculation(z, 1, -1, 1.41);
 
 
-			this->Nodes_calculation(i, -1, 1, 1.41);
+			this->Nodes_calculation(z, -1, 1, 1.41);
 		}
 		this->Nodes_calculation(1, 0, 0, 1.0);
 
@@ -113,10 +113,10 @@ void Algorithm_base::Executive() {
 		this->auxiliary = this->auxiliary->next;
 	}
 
-	for (int i = 0; i < 208; ++i) {
-		for (int j = 0; j < 200; ++j) {
-			for (int k = 0; k < 200; ++k) {
-				nodes[i][j][k].next = nullptr;
+	for (size_t z = 0; z < 208; z++) {
+		for (size_t x = 0; x < 200; x++) {
+			for (size_t y = 0; y < 200; y++) {
+				nodes[z][x][y].next = nullptr;
 			}
 		}
 	}
@@ -128,10 +128,10 @@ void Algorithm_base::Executive() {
 
 	if (!this->nodes_queue.empty())
 	{
-		for (size_t i = this->begin.z; i < images_number; i++)
+		for (size_t z = this->begin.z; z < images_number; z++)
 		{
-			QString filename = QString("testy_%1.bmp").arg(i, 4, 10, QChar('0'));
-			this->images[i].save(this->result_path + "//" + QString("testy_%1.bmp").arg(i, 4, 10, QChar('0')));
+			QString filename = QString("testy_%1.bmp").arg(z, 4, 10, QChar('0'));
+			this->images[z].save(this->result_path + "//" + QString("testy_%1.bmp").arg(z, 4, 10, QChar('0')));
 
 		}
 	}
