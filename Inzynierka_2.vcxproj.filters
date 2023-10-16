@@ -29,104 +29,104 @@
     <QtUic Include="Glowna_klasa.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <ClCompile Include="Main_class.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SearchAlgorithm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Buttons.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Label.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LineEdit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Control_Widget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Box_for_1_series.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Box_for_10_series.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Box_for_mark.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Result_1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Result_10.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Series_1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Series_10.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="View.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mark.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Label.h">
+    <ClInclude Include="headers\Box_for_1_series.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LineEdit.h">
+    <ClInclude Include="headers\Box_for_10_series.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Box_for_1_series.h">
+    <ClInclude Include="headers\Box_for_mark.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Box_for_10_series.h">
+    <ClInclude Include="headers\Buttons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Box_for_mark.h">
+    <ClInclude Include="headers\Label.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Result_10.h">
+    <ClInclude Include="headers\LineEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Series_10.h">
+    <ClInclude Include="headers\Result_10.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="View.h">
+    <ClInclude Include="headers\SearchAlgorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SearchAlgorithm.h">
+    <ClInclude Include="headers\Series_10.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Buttons.h">
+    <ClInclude Include="headers\View.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Main_class.h">
+    <QtMoc Include="headers\Control_Widget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Result_1.h">
+    <QtMoc Include="headers\Main_class.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Series_1.h">
+    <QtMoc Include="headers\Mark.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Mark.h">
+    <QtMoc Include="headers\Result_1.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Control_Widget.h">
+    <QtMoc Include="headers\Series_1.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="include\Box_for_1_series.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Box_for_10_series.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Box_for_mark.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Buttons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Control_Widget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Label.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\LineEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Main_class.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Mark.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Result_1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Result_10.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\SearchAlgorithm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Series_1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Series_10.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\View.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

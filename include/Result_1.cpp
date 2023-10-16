@@ -139,7 +139,6 @@ void Result_1::image_reamove()
         
     }
 }
-
 void Result_1::image_reload()
 {
     this->dir.setPath(this->files_path);
