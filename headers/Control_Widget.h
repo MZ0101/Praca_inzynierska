@@ -7,8 +7,6 @@
 #include <QCheckBox>
 #include <QGroupBox>
 
-//#include <map>
-
 class Begin_Widget :public QWidget
 {
 	Q_OBJECT
@@ -33,7 +31,6 @@ protected:
 	void currentCheckBox_2();
 
 };
-
 
 class WidgetsControl : public QWidget
 {

@@ -236,7 +236,8 @@ void Main_class::calculation()
                 {
                     value = 0.0;
 
-                    execute->result_path = execute->result_path + "//Series_" + QString::number(i);
+                    execute->result_path = this->result_10->files_path  + QString::number(i);
+                    qDebug() << execute->result_path;
                     execute->Executive();
 
                     value = execute->nodes[this->end[2]][this->end[0]][this->end[1]].real;
