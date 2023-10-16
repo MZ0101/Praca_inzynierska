@@ -211,13 +211,10 @@ void Main_class::calculation()
 
         this->division = 0;
         this->average_way = 0;
-       // this->control_widget->method_label_box->setText("Method: " + this->control_widget->method_label[this->control_widget->current_method]);
-       // this->control_widget->box_for_calculation->show();
         if (this->series_10)
         {
-            //this->result_path += ;
+            
             this->result_10->files_path = execute->result_path + "//Series_";
-            qDebug() << this->result_path;
            
             this->result_10->image_remove();
             this->result_10->current_series = 0;
@@ -237,7 +234,7 @@ void Main_class::calculation()
                     value = 0.0;
 
                     execute->result_path = this->result_10->files_path  + QString::number(i);
-                    qDebug() << execute->result_path;
+                   
                     execute->Executive();
 
                     value = execute->nodes[this->end[2]][this->end[0]][this->end[1]].real;
