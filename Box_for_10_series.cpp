@@ -6,7 +6,7 @@ Box_for_10_series::Box_for_10_series(QWidget* parent) : QGroupBox(parent)
     this->b_vertical = new QVBoxLayout();
 
     //this->button[0].setText("Wybierz");
-    this->button->setText("Zaznacz");
+    this->button->setText("Mark");
 
     this->vertical = new QVBoxLayout();
     this->horizontal =  new QHBoxLayout[3];

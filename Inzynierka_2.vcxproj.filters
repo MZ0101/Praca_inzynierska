@@ -29,7 +29,7 @@
     <QtUic Include="Glowna_klasa.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <ClCompile Include="Mian_class.cpp">
+    <ClCompile Include="Main_class.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -104,7 +104,7 @@
     <QtMoc Include="Main_class.h" />
     <ClCompile Include="SearchAlgorithm.cpp" />
     <ClCompile Include="Buttons.cpp" />
-    <ClCompile Include="Mian_class.cpp" />
+    <ClCompile Include="Main_class.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="LineEdit.cpp" />
     <ClCompile Include="main.cpp" />

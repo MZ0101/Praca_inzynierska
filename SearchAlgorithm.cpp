@@ -20,7 +20,7 @@ bool Algorithm_base::Reload(int* begin, int* end)
 		this->pixel_color = qRgb(0, 0, 0);
 		this->images[z].setColor(0, this->pixel_color);
 
-		//Bia³y
+		//Bialy
 		this->pixel_color = qRgb(255, 255, 255);
 		this->images[z].setColor(1, this->pixel_color);
 
@@ -47,10 +47,11 @@ bool Algorithm_base::Reload(int* begin, int* end)
 
 	this->pixel_color = qRgb(255, 0, 0);
 	this->images[this->begin.z].setColor(4, this->pixel_color);
-
 	this->images[this->end.z].setColor(4, this->pixel_color);
+	
 
 	this->images[this->begin.z].setPixel(this->begin.x, this->begin.y, 4);
+
 	this->begin.real = 0.0;
 	this->deltax = this->begin.x - this->end.x;
 	this->deltay = this->begin.y - this->end.y;
@@ -78,30 +79,24 @@ void Algorithm_base::Executive() {
 
 		for (size_t z{ 0 }; z < 2; z++)
 		{
-			this->Nodes_calculation(z, 1, 0, 1.0);
+			(this->*Nodes_claculation)(z, 1, 0, 1.0);
 
+			(this->*Nodes_claculation)(z, 0, 1, 1.0);
 
-			this->Nodes_calculation(z, 0, 1, 1.0);
+			(this->*Nodes_claculation)(z, -1, 0, 1.0);
 
+			(this->*Nodes_claculation)(z, 0, -1, 1.0);
 
-			this->Nodes_calculation(z, -1, 0, 1.0);
+			(this->*Nodes_claculation)(z, 1, 1, 1.41);
 
+			(this->*Nodes_claculation)(z, -1, -1, 1.41);
 
-			this->Nodes_calculation(z, 0, -1, 1.0);
+			(this->*Nodes_claculation)(z, 1, -1, 1.41);
 
+			(this->*Nodes_claculation)(z, -1, 1, 1.41);
 
-			this->Nodes_calculation(z, 1, 1, 1.41);
-
-
-			this->Nodes_calculation(z, -1, -1, 1.41);
-
-
-			this->Nodes_calculation(z, 1, -1, 1.41);
-
-
-			this->Nodes_calculation(z, -1, 1, 1.41);
 		}
-		this->Nodes_calculation(1, 0, 0, 1.0);
+		(this->*Nodes_claculation)(1, 0, 0, 1.0);
 
 	}
 
@@ -125,6 +120,7 @@ void Algorithm_base::Executive() {
 
 	this->images[this->begin.z].setPixel(this->begin.x, this->begin.y, 4);
 	this->images[this->end.z].setPixel(this->end.x, this->end.y, 4);
+	
 
 	if (!this->nodes_queue.empty())
 	{
@@ -136,7 +132,7 @@ void Algorithm_base::Executive() {
 		}
 	}
 
-	qDebug() << "Koszt: " << this->nodes[this->end.z][this->end.x][this->end.y].real;
+	qDebug() << "Cost: " << this->nodes[this->end.z][this->end.x][this->end.y].real;
 
 	while (!nodes_queue.empty()) {
 		nodes_queue.pop();
@@ -145,93 +141,90 @@ void Algorithm_base::Executive() {
 	delete[] images;
 };
 
-void Algorithm_dijkstra::Nodes_calculation(int dz, int dx, int dy, float dreal)
+void Algorithm_base::Nodes_calculation_dijkstra(int dz, int dx, int dy, float dreal)
 {
-	int x = this->queue_top.x + dx;
-	int y = this->queue_top.y + dy;
-	int z = this->queue_top.z + dz;
-	float real = this->queue_top.real + dreal;
-
-	if (x >= 0 && x <= 199 && y >= 0 && y <= 199 && z < this->images_number)
-	{
-		this->pixel_color = this->images[z].color(this->images[z].pixelIndex(x, y));
-
-		if (255 == qRed(this->pixel_color) && 255 == qGreen(this->pixel_color) && 255 == qBlue(this->pixel_color))
+	    int x = this->queue_top.x + dx;
+		int y = this->queue_top.y + dy;
+		int z = this->queue_top.z + dz;
+		float real = this->queue_top.real + dreal;
+	
+		if (x >= 0 && x <= 199 && y >= 0 && y <= 199 && z < this->images_number)
 		{
-
-			this->nodes[z][x][y].x = this->queue_top.x;
-			this->nodes[z][x][y].y = this->queue_top.y;
-			this->nodes[z][x][y].z = this->queue_top.z;
-			this->nodes[z][x][y].real = real;
-			this->images[z].setPixel(x, y, 2);
-			this->nodes[z][x][y].next = &this->nodes[this->queue_top.z][this->queue_top.x][this->queue_top.y];
-
-			this->nodes_queue.push(node(x, y, z, real, real));
+			this->pixel_color = this->images[z].color(this->images[z].pixelIndex(x, y));
+	
+			if (255 == qRed(this->pixel_color) && 255 == qGreen(this->pixel_color) && 255 == qBlue(this->pixel_color))
+			{
+	
+				this->nodes[z][x][y].x = this->queue_top.x;
+				this->nodes[z][x][y].y = this->queue_top.y;
+				this->nodes[z][x][y].z = this->queue_top.z;
+				this->nodes[z][x][y].real = real;
+				this->images[z].setPixel(x, y, 2);
+				this->nodes[z][x][y].next = &this->nodes[this->queue_top.z][this->queue_top.x][this->queue_top.y];
+	
+				this->nodes_queue.push(node(x, y, z, real, real));
+			}
 		}
-	}
 }
 
-//#############################################################
-
-void Algorithm_total::Nodes_calculation(int dz, int dx, int dy, float dreal)
+void Algorithm_base::Nodes_calculation_total(int dz, int dx, int dy, float dreal)
 {
-	int x = this->queue_top.x + dx;
-	int y = this->queue_top.y + dy;
-	int z = this->queue_top.z + dz;
-	float real = this->queue_top.real + dreal;
-
-	if (x >= 0 && x <= 199 && y >= 0 && y <= 199 && z < this->images_number)
-	{
-		this->pixel_color = this->images[z].color(this->images[z].pixelIndex(x, y));
-
-		if (255 == qRed(this->pixel_color) && 255 == qGreen(this->pixel_color) && 255 == qBlue(this->pixel_color))
+	    int x = this->queue_top.x + dx;
+		int y = this->queue_top.y + dy;
+		int z = this->queue_top.z + dz;
+		float real = this->queue_top.real + dreal;
+	
+		if (x >= 0 && x <= 199 && y >= 0 && y <= 199 && z < this->images_number)
 		{
-			this->deltax = x - this->end.x;
-			this->deltay = y - this->end.y;
-			this->deltaz = z - this->end.z;
-			this->nodes[z][x][y].x = this->queue_top.x;
-			this->nodes[z][x][y].y = this->queue_top.y;
-			this->nodes[z][x][y].z = this->queue_top.z;
-			this->nodes[z][x][y].real = real;
-
-			this->h = std::sqrt((this->deltax * this->deltax) + (this->deltay * this->deltay) + (this->deltaz * this->deltaz));
-			this->images[z].setPixel(x, y, 2);
-			this->nodes[z][x][y].next = &this->nodes[this->queue_top.z][this->queue_top.x][this->queue_top.y];
-
-
-			this->nodes_queue.push(node(x, y, z, real, (h + real)));
+			this->pixel_color = this->images[z].color(this->images[z].pixelIndex(x, y));
+	
+			if (255 == qRed(this->pixel_color) && 255 == qGreen(this->pixel_color) && 255 == qBlue(this->pixel_color))
+			{
+				this->deltax = x - this->end.x;
+				this->deltay = y - this->end.y;
+				this->deltaz = z - this->end.z;
+				this->nodes[z][x][y].x = this->queue_top.x;
+				this->nodes[z][x][y].y = this->queue_top.y;
+				this->nodes[z][x][y].z = this->queue_top.z;
+				this->nodes[z][x][y].real = real;
+	
+				this->heuristics = std::sqrt((this->deltax * this->deltax) + (this->deltay * this->deltay) + (this->deltaz * this->deltaz));
+				this->images[z].setPixel(x, y, 2);
+				this->nodes[z][x][y].next = &this->nodes[this->queue_top.z][this->queue_top.x][this->queue_top.y];
+	
+	
+				this->nodes_queue.push(node(x, y, z, real, (heuristics + real)));
+			}
 		}
-	}
 }
 
-//#############################################################
-void Algorithm_euclidean::Nodes_calculation(int dz, int dx, int dy, float dreal)
+void Algorithm_base::Nodes_calculation_euclidean(int dz, int dx, int dy, float dreal)
 {
-	int x = this->queue_top.x + dx;
-	int y = this->queue_top.y + dy;
-	int z = this->queue_top.z + dz;
-	float real = this->queue_top.real + dreal;
-
-	if (x >= 0 && x <= 199 && y >= 0 && y <= 199 && z < this->images_number)
-	{
-		this->pixel_color = this->images[z].color(this->images[z].pixelIndex(x, y));
-
-		if (255 == qRed(this->pixel_color) && 255 == qGreen(this->pixel_color) && 255 == qBlue(this->pixel_color))
+	    int x = this->queue_top.x + dx;
+		int y = this->queue_top.y + dy;
+		int z = this->queue_top.z + dz;
+		float real = this->queue_top.real + dreal;
+	
+		if (x >= 0 && x <= 199 && y >= 0 && y <= 199 && z < this->images_number)
 		{
-			this->deltax = x - this->end.x;
-			this->deltay = y - this->end.y;
-			this->deltaz = z - this->end.z;
-			this->nodes[z][x][y].x = this->queue_top.x;
-			this->nodes[z][x][y].y = this->queue_top.y;
-			this->nodes[z][x][y].z = this->queue_top.z;
-			this->nodes[z][x][y].real = real;
-
-			this->h = std::sqrt((this->deltax * this->deltax) + (this->deltay * this->deltay) + (this->deltaz * this->deltaz));
-			this->images[z].setPixel(x, y, 2);
-			this->nodes[z][x][y].next = &this->nodes[this->queue_top.z][this->queue_top.x][this->queue_top.y];
-
-			this->nodes_queue.push(node(x, y, z, real, h));
+			this->pixel_color = this->images[z].color(this->images[z].pixelIndex(x, y));
+	
+			if (255 == qRed(this->pixel_color) && 255 == qGreen(this->pixel_color) && 255 == qBlue(this->pixel_color))
+			{
+				this->deltax = x - this->end.x;
+				this->deltay = y - this->end.y;
+				this->deltaz = z - this->end.z;
+				this->nodes[z][x][y].x = this->queue_top.x;
+				this->nodes[z][x][y].y = this->queue_top.y;
+				this->nodes[z][x][y].z = this->queue_top.z;
+				this->nodes[z][x][y].real = real;
+	
+				this->heuristics = std::sqrt((this->deltax * this->deltax) + (this->deltay * this->deltay) + (this->deltaz * this->deltaz));
+				this->images[z].setPixel(x, y, 2);
+				this->nodes[z][x][y].next = &this->nodes[this->queue_top.z][this->queue_top.x][this->queue_top.y];
+	
+				this->nodes_queue.push(node(x, y, z, real, heuristics));
+			}
+	
 		}
-
-	}
 }

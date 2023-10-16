@@ -4,7 +4,7 @@ Begin_Widget::Begin_Widget(QWidget* parent) : QWidget(parent)
 {
 
 	QString text[] = { "One Series: ", "Ten Series: " };
-	QString text_heuristic[] = { "Dikstra ", "Total ", "Euklidesowa " };
+	QString text_heuristic[] = { "Dijkstra ", "Total ", "Euclidean" };
 
 	for (size_t i{ 0 }; i < 2; i++)
 	{
@@ -103,8 +103,8 @@ WidgetsControl::WidgetsControl()
 	this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 	this->buttons[0].setText("Previous");
 	this->buttons[1].setText("Another");
-	this->buttons[0].setEnabled(false);
-	this->buttons[1].setEnabled(false);
+	/*this->buttons[0].setEnabled(false);
+	this->buttons[1].setEnabled(false);*/
 
 	this->begin_widget = new Begin_Widget();
 
@@ -165,16 +165,16 @@ void WidgetsControl::previous_widget()
 		this->vertical->addWidget(this->widget_array[this->current_widget]);
 		this->widget_array[this->current_widget]->show();
 
-		this->buttons[1].setEnabled(true);
+		/*this->buttons[1].setEnabled(true);
 
-		if (this->current_widget == 0) this->buttons[0].setEnabled(false);
+		if (this->current_widget == 0) this->buttons[0].setEnabled(false);*/
 		//this->box_for_calculation->hide();
 	}
 }
 
 void WidgetsControl::another_widget()
 {
-	if (this->current_widget < 2)
+	if (this->current_widget < 2  && this->widget_array[this->current_widget + 1] != nullptr)
 	{
 		this->widget_array[this->current_widget]->hide();
 		this->vertical->removeWidget(this->widget_array[this->current_widget]);
@@ -183,9 +183,9 @@ void WidgetsControl::another_widget()
 		this->vertical->addWidget(this->widget_array[this->current_widget]);
 		this->widget_array[this->current_widget]->show();
 
-		this->buttons[0].setEnabled(true);
+		/*this->buttons[0].setEnabled(true);
 
-		if (this->current_widget == 2 || this->widget_array[this->current_widget + 1] == nullptr) this->buttons[1].setEnabled(false);
+		if (this->current_widget == 2 || ) this->buttons[1].setEnabled(false);*/
 		//if (this->current_widget == 2) this->box_for_calculation->show();
 	}
 }
