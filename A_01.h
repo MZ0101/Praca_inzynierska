@@ -41,7 +41,6 @@ public:
 	data_1(int x, int y, int z, float real, float total) :
 		data(x, y, z, real), total(total) {}
 
-
 	data_1() {};
 
 	  bool operator>(const data_1& right) const
@@ -65,8 +64,6 @@ public:
 		return h > right.h;
 	}
 };
-
-
 
 template<class T>
 	class A_00
@@ -111,6 +108,7 @@ template<class T>
 				    {
 				
 				        if (this->nodes_queue.empty()) { return; }
+
 				        this->x = nodes_queue.top().x;
 				
 				        this->y = nodes_queue.top().y;
@@ -179,19 +177,15 @@ template<class T>
 					this->aux = this->aux->next;
 				}
 
-
-				for (int i = 0; i < 208; ++i) {
-					for (int j = 0; j < 200; ++j) {
-						for (int k = 0; k < 200; ++k) {
+				for (int i = 0; i < 208; i++) {
+					for (int j = 0; j < 200; j++) {
+						for (int k = 0; k < 200; k++) {
 							nodes[i][j][k].next = nullptr;
 						}
 					}
 				}
 				
-
 				//Czerwony
-				
-			
 			    this->image[this->begin.z].setPixel(this->begin.x, this->begin.y, 4);
 			    this->image[this->end.z].setPixel(this->end.x, this->end.y, 4);
 			
@@ -212,7 +206,6 @@ template<class T>
 				}
 
 			    delete[] image;
-
 		};
 		virtual void Nodes_calculation(int z, int x, int y, float real) {};
 
@@ -221,8 +214,6 @@ template<class T>
 			    this->end.x = end[0];
 				this->end.y = end[1];
 				this->end.z = end[2];
-
-				//this->nodes[this->end.z][this->end.x][this->end.y].next = nullptr;
 			
 			    this->begin.x = begin[0];
 			    this->begin.y = begin[1];
@@ -250,8 +241,6 @@ template<class T>
 						//Zielony
 						this->pixel_color = qRgb(0, 255, 0);
 						this->image[i].setColor(3, this->pixel_color);
-
-			          
 			        }
 
 					QRgb value_begin = this->image[this->end.z].color(this->image[this->end.z].pixelIndex(this->end.x, this->end.y));

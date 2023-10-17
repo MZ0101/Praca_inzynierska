@@ -83,24 +83,17 @@ void A_01::Nodes_calculation(int z ,int x, int y, float real)
     {
         this->pixel_color = this->image[z].color(this->image[z].pixelIndex(x, y));
        
-        if (255 == qRed(this->pixel_color) && 255 == qGreen(this->pixel_color) && 255 == qBlue(this->pixel_color))
+        if (qRed(this->pixel_color) >0 && qGreen(this->pixel_color) > 0 &&  qBlue(this->pixel_color) > 0)
         {
-            /*this->deltax = x - this->end.x;
-            this->deltay = y - this->end.y;
-            this->deltaz = z - this->end.z;*/
             this->nodes[z][x][y].x = this->x;
             this->nodes[z][x][y].y = this->y;
             this->nodes[z][x][y].z = this->z;
             this->nodes[z][x][y].real = real;
 
-            //this->h = std::sqrt((this->deltax * this->deltax) + (this->deltay * this->deltay) + (this->deltaz * this->deltaz));
             this->image[z].setPixel(x, y, 2);
             this->nodes[z][x][y].next = &this->nodes[this->z][this->x][this->y];
-
-
             this->nodes_queue.push(data(x, y, z, real));
         }
-     
     }
 }
 

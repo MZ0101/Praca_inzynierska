@@ -1,2 +1,4 @@
-﻿  Result_10.cpp
+﻿  A_01.cpp
+C:\Users\JA\Documents\Inzynierka_2\A_01.cpp(1,1): warning C4828: Plik zawiera znak rozpoczynający się od przesunięcia 0x399, który jest niedozwolony w bieżącym zestawie znaków źródła (strona kodowa 65001).
+C:\Users\JA\Documents\Inzynierka_2\A_01.h(1,1): warning C4828: Plik zawiera znak rozpoczynający się od przesunięcia 0x1406, który jest niedozwolony w bieżącym zestawie znaków źródła (strona kodowa 65001).
   Inzynierka_2.vcxproj -> C:\Users\JA\Documents\Inzynierka_2\x64\Debug\Inzynierka_2.exe

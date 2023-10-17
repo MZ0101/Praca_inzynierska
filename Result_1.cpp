@@ -4,9 +4,6 @@ Result_1::Result_1(QWidget* parent , QString path) : QWidget(parent)
 {
     this->files_path = path;
 
-   /* this->setFocus();
-    this->setFocusPolicy(Qt::StrongFocus);*/
-
     this->hlayout.addWidget(&this->result);
     this->hlayout.setAlignment(&this->result, Qt::AlignHCenter);
 
@@ -17,10 +14,8 @@ Result_1::Result_1(QWidget* parent , QString path) : QWidget(parent)
     this->image_name.setFont(QFont("Arial", 11));
     this->image_name.setStyleSheet("background-color: white; border: 1px solid black; font-weight: bold;");
 
-
     this->main_hlayout.setAlignment(Qt::AlignHCenter);
 
-   
     QStringList names = { "Beginning","Previous","Another","End" };
     void (Result_1:: * functions[4])() = { &Result_1::begin,&Result_1::previous,&Result_1::another, &Result_1::end };
 
@@ -63,7 +58,6 @@ bool Result_1::event(QEvent* event)
     {
 
         this->image_view.wheelEvent(static_cast<QWheelEvent*>(event));
-
     }
     return QWidget::event(event);
 }
@@ -119,7 +113,6 @@ void Result_1::image_reamove()
 #include <QFile>
 
     QString files_path{};
-    //QString path{};
     QDir dir{};
     QStringList files_list = {};
 
@@ -155,9 +148,7 @@ void Result_1::image_reload()
         this->image_view.scene_v.addPixmap(QPixmap::fromImage(this->image).scaled(800, 800));
         this->image_name.setText("Image name : " + this->files_list[this->current_image_index]);
         
-
         this->result.setStyleSheet("background-color: white; border: 2px solid green; font-weight: bold;");
-       
     }
     else
     {
