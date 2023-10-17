@@ -1,32 +1,32 @@
-# **Inzynierka_2 - Projekt Analizy Mikrostruktury Elektrod SOFC**
+# **Project of microstructure analysis of SOFC (Solid Oxide Fuel Cell) fuel cell electrodes.**
 
-## **Opis**
+## **Description**
+The project was created to search for the shortest wipes in the microstructures of SOFC fuel cells (solid oxide fuel cells). 
+The program uses the Dijkstra and A* algorithms and the Qt library to process images with the .BMP extension. 
+Additionally, the Qt library was used to create a simple user interface.
 
-Projekt "Inzynierka_2" został stworzony w celu znajdowania najkrótszych ścieżek w analizie mikrostruktury elektrod ogniw paliwowych typu SOFC (stałotlenkowych ogniw paliwowych). Program wykorzystuje algorytmy Dijkstry i A* oraz bibliotekę Qt, aby efektywnie przetwarzać obrazy w formacie .BMP. Ponadto, biblioteka Qt została użyta do stworzenia prostego interfejsu użytkownika.
+## **Program Operation**
 
-## **Opis Obrazów**
+The images on which the program works have dimensions of 200x200 pixels, which can be treated as a pixel graph. Pixels in images come in black, white and various shades of gray. Currently, the algorithm works in such a way that if a pixel is white, a hydrogen molecule can pass through that area. To run the algorithm, the user must select the starting and ending points, i.e. the image number and pixel coordinates. Coordinates can be entered from the keyboard or select points with the mouse by clicking on a pixel in the image. The program also allows you to select the number of coordinate sets on which the algorithm should operate - the user can select one or ten sets. If ten data sets are selected, the average road cost will also be calculated.
 
-Obrazy, na których program działa, mają wymiary 200x200 pikseli, co można traktować jako graf pikseli. Piksele na obrazach występują w kolorach czarnym, białym lub różnych odcieniach szarości. Obecnie algorytm działa w taki sposób, że jeśli piksel jest biały, to przez ten obszar może przejść cząsteczka wodoru. Aby uruchomić algorytm, użytkownik musi wybrać punkt początkowy i końcowy, czyli numer obrazu oraz współrzędne piksela. Współrzędne można wprowadzić z klawiatury lub wybrać za pomocą narzędzia zaznaczania, co ułatwia wybór obrazu i punktów na obrazie. Program umożliwia także wybór liczby zestawów współrzędnych, na których ma działać algorytm - użytkownik może wybrać jeden lub dziesięć zestawów. W przypadku wyboru dziesięciu zestawów danych zostanie również obliczona średnia kosztu drogi.
+## **Image Processing**
 
-## **Przetwarzanie Obrazów**
+The image-based program resulting from the algorithm is visualized in images. Blue pixels represent visited pixels, green pixels represent the shortest path, and red pixels represent starting and starting points.
 
-Program przetwarza obrazy, a wyniki działania algorytmu są wizualizowane na obrazach. Piksele o kolorach niebieskich symbolizują odwiedzone piksele, piksele zielone reprezentują ścieżkę, a piksele czerwone oznaczają punkty początkowe i końcowe.
+## **Types of Shortest Path Search**
+Currently, the program offers three different search criteria for the shortest source:
 
-## **Rodzaje Wyszukiwania Najkrótszej Ścieżki**
-Na chwilę obecną program oferuje trzy różne kryteria wyszukiwania najkrótszej ścieżki:
+- Cost to Reach the Vertex (Dijkstra's Algorithm): This algorithm provides the best results, but may be time-consuming.<br>
+- Actual Cost + Euclidean Distance (Algorithm A):* This mode tracks the cost to reach the vertex and the estimated distance, which is calculated as Euclidean distance. It is slightly less accurate than Dikstra's algorithm, but on average half as fast.<br>
+- Far Euclidean (Algorithm A):* This mode is the fastest, but always produces the most inaccurate results. It can be used to check whether a shortest path exists.<br>
 
-- Koszt Dojścia do Wierzchołka (Algorytm Dijkstry): Algorytm ten zapewnia najbardziej dokładne wyniki, ale może być czasochłonny.<br>
-- Koszt Dojścia + Odległość Euklidesowa (Algorytm A):* Ten tryb uwzględnia koszt dojścia do wierzchołka oraz odległość estymowaną, która jest obliczana jako odległość euklidesowa. Jest to kompromis między dokładnością a wydajnością.<br>
-- Odległość Euklidesowa (Algorytm A):* Ten tryb jest najszybszy, ale nie zawsze daje najbardziej dokładne wyniki. Może być używany do ogólnego sprawdzenia możliwości znalezienia ścieżki.<br>
+## **Possible Extensions**
+The project can be developed by adding new features:
 
-## **Możliwe Rozszerzenia**
-Projekt można rozwijać, dodając nowe funkcje:
-
-- Można dodać więcej algorytmów wyszukiwania ścieżki, aby dodac więcej opcji użytkownikowi.<br>
-- Dodanie funkcji zapisywania wyników działania algorytmu bezpośrednio do pliku .xlsx lub .txt, co ułatwi analizę wyników.<br>
-- Kontrola wielkości okien w programie w zależności od rozdzielczości wyświetlacza.
-- Umożliwienie użytkownikowi przeglądania wyników przetwarzania w różnych zestawach danych.<br>
-- Pozwolić użytkownikowi wybierać kryterium wyszukiwania ścieżki z poziomu przeglądu rezultatów.<br>
-- Utworzyć instalator, który ułatwi innym użytkownikom instalację programu.<br>
-- Można zoptymalizować działanie programu.<br>
-
+- More path finding algorithms can be added to add more options to the user.<br>
+- Added the function of saving the results of the algorithm directly to an .xlsx or .txt file, which will facilitate the analysis of the results.<br>
+- Control the size of windows in the program depending on the display resolution.
+- Allowing the user to view processing results across different data sets.<br>
+- Allow user to select path search criterion from results overview.<br>
+- Create an installer that will make it easier for other users to install the program.<br>
+- You can optimize the performance of the program.<br>
