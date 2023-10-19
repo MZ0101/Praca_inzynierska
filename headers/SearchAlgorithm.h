@@ -28,20 +28,8 @@ class Algorithm_base
 {
 public:
 
-	Algorithm_base(int current_alhorithm = 0)
-	{
-		QDir folder_data("Dane");
-		this->file_path = folder_data.absolutePath();
-		this->file_path = file_path + "//";
-
-		this->files = folder_data.entryList(QDir::Files | QDir::NoDotAndDotDot);
-		this->files.erase(files.begin());
-
-		if (current_alhorithm == 0) Nodes_claculation = &Algorithm_base::Nodes_calculation_dijkstra;
-		else if (current_alhorithm == 1) Nodes_claculation = &Algorithm_base::Nodes_calculation_total;
-		else if (current_alhorithm == 2) Nodes_claculation = &Algorithm_base::Nodes_calculation_euclidean;
-	};
-
+	Algorithm_base(int current_search_type = 0);
+	
 	~Algorithm_base() {};
 
 	int choice_calculation{ 0 };
@@ -65,11 +53,13 @@ public:
 	node begin;
 	node end;
 
-	void(Algorithm_base::* Nodes_claculation)(int dz, int dx, int dy, float dreal);
+	void(Algorithm_base::* Search_type)(int& z, int& x, int& y, float& real);
 	void Executive();
-	void Nodes_calculation_dijkstra(int dz, int dx, int dy, float dreal);
-	void Nodes_calculation_total(int dz, int dx, int dy, float dreal);
-	void Nodes_calculation_euclidean(int dz, int dx, int dy, float dreal);
+	void Nodes_calculation(int dz, int dx, int dy, float dreal);
+
+	void Searching_for_real_value(int& z, int& x, int& y, float& real); // Dijkstra algorithm - real
+	void Searching_for_total_value(int& z, int& x, int& y, float& real); // A* algorithm - euclidean + real
+	void Searching_for_euclidean_value(int& z, int& x, int& y, float& real); // A* algorithm - euclidean
 	bool Reload(int* begin, int* end);
 	
 };

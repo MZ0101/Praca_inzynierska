@@ -27,6 +27,8 @@ Box_for_1_series::Box_for_1_series(QWidget* parent, QString title) :QGroupBox(pa
 		this->group[i].addWidget(&this->edit[i]);
 		this->main_group->addLayout(&this->group[i]);
 	}
+
+	
 	this->setLayout(this->main_group);
 	this->edit[currentLineEdit].setFocus();
 

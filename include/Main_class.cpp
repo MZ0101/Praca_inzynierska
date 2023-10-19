@@ -33,7 +33,7 @@ void Main_class::screen(QWidget* widget)
 
     int screenWidth = screenRect.width();
     int screenHeight = screenRect.height();
-
+    
     widget->move((screenWidth - widget->width()) / 2, (screenHeight - widget->height()) / 2);
 }
 
@@ -236,6 +236,14 @@ void Main_class::calculation()
                     execute->result_path = this->result_10->files_path  + QString::number(i);
                    
                     execute->Executive();
+
+                    for (size_t z = 0; z < 208; z++) {
+                        for (size_t x = 0; x < 200; x++) {
+                            for (size_t y = 0; y < 200; y++) {
+                                execute->nodes[z][x][y].next = nullptr;
+                            }
+                        }
+                    }
 
                     value = execute->nodes[this->end[2]][this->end[0]][this->end[1]].real;
                     this->result_10->max_series++;
