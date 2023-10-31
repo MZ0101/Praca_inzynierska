@@ -63,17 +63,16 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <IncludePath>headers;$(IncludePath)</IncludePath>
     <SourcePath>include;$(SourcePath)</SourcePath>
-    <LibraryPath>E:\Inzynierka_2;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>Qt6Cored.lib;Qt6Guid.lib;Qt6Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -108,7 +107,7 @@
     <ClInclude Include="headers\Box_for_10_series.h" />
     <ClInclude Include="headers\Box_for_1_series.h" />
     <ClInclude Include="headers\Box_for_mark.h" />
-    <ClInclude Include="headers\Buttons.h" />
+    <QtMoc Include="headers\Buttons.h" />
     <ClInclude Include="headers\Label.h" />
     <ClInclude Include="headers\LineEdit.h" />
     <ClInclude Include="headers\Result_10.h" />

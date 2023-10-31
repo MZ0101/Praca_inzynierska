@@ -2,16 +2,30 @@
 Series_10::Series_10(QWidget* parent) : QWidget(parent)
 {
     this->boxs_data = new Box_for_10_series[10];
-    this->horisontal_mian = new QHBoxLayout();
-    this->horisontal_mian->setAlignment(Qt::AlignCenter);
+    this->horisontal_for_boxs = new QHBoxLayout();
+    this->horisontal_for_boxs->setAlignment(Qt::AlignCenter);
     //this->vertical_main = new QVBoxLayout();
 
     this->verticals = new QVBoxLayout[2];
-    this->button_clicked = new Buttons();
+    this->button_for_calculate = new Buttons();
 
-    this->button_clicked->setText("Calculate");
-    this->button_clicked->setFixedWidth(200);
-    this->button_clicked->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+    this->button_for_calculate->setText("Calculate");
+    this->button_for_calculate->setFixedWidth(200);
+    this->button_for_calculate->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+
+    this->button_for_randomize = new Buttons();
+
+    QObject::connect(this->button_for_randomize, &QPushButton::clicked,this, &Series_10::randomization_of_points);
+
+    this->button_for_randomize->setText("Randomize points");
+    this->button_for_randomize->setFixedWidth(200);
+
+
+    this->horisontal_for_bottom_buttons = new QHBoxLayout();
+
+    this->horisontal_for_bottom_buttons->addWidget(this->button_for_calculate);
+    this->horisontal_for_bottom_buttons->addWidget(this->button_for_randomize);
+
 
     for (size_t i{ 0 }; i < 10; i++)
     {
@@ -28,12 +42,12 @@ Series_10::Series_10(QWidget* parent) : QWidget(parent)
 
     }
 
-    this->horisontal_mian->addLayout(&this->verticals[0]);
-    this->horisontal_mian->addLayout(&this->verticals[1]);
+    this->horisontal_for_boxs->addLayout(&this->verticals[0]);
+    this->horisontal_for_boxs->addLayout(&this->verticals[1]);
 
-    this->vertical_main.addLayout(this->horisontal_mian);
-    this->vertical_main.addWidget(this->button_clicked);
-    this->vertical_main.setAlignment(this->button_clicked, Qt::AlignHCenter);
+    this->vertical_main.addLayout(this->horisontal_for_boxs);
+    this->vertical_main.addLayout(this->horisontal_for_bottom_buttons);
+    this->vertical_main.setAlignment(this->button_for_calculate, Qt::AlignHCenter);
 
   
     this->setLayout(&this->vertical_main);
@@ -52,10 +66,64 @@ void Series_10::mark_button(Buttons* button_clicked)
     }
 }
 
+void Series_10::randomization_of_points()
+{
+
+    QDir dir("Dane");
+    QStringList files_list = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+    QImage image;
+    files_list.erase(files_list.begin());
+   
+    int begin[3] = { 0,0,0 };
+    int end[3] = { 0,0,0 };
+
+ 
+        for (int i{ 0 }; i < 10; i++)
+        {
+            QRgb pixel_color;
+
+            do
+            {
+                begin[0] = std::rand() % 200;
+                begin[1] = std::rand() % 200;
+                begin[2] = std::rand() % 208;
+
+                image.load("Dane//" + files_list[begin[2]]);
+                pixel_color = image.color(image.pixelIndex(begin[0], begin[1]));
+              
+            }
+            while (qRed(pixel_color)  != 255 && qBlue(pixel_color) != 255 && qGreen(pixel_color) != 255);
+       
+
+            do
+            {
+                end[0] = std::rand() % 200;
+                end[1] = std::rand() % 200;
+                end[2] = std::rand() % 208;
+
+                image.load("Dane//" + files_list[end[2]]);
+                pixel_color = image.color(image.pixelIndex(end[0], end[1]));
+               
+            } while (qRed(pixel_color) != 255 && qBlue(pixel_color) != 255 && qGreen(pixel_color) != 255);
+
+       
+            for (size_t b{ 0 }; b < 3; b++)
+            {
+                this->boxs_data[i].begin_labels[b].setText(QString::number(begin[b]));
+                this->boxs_data[i].end_labels[b].setText(QString::number(end[b]));
+            }
+
+            
+
+        }
+}
+
 Series_10::~Series_10()
 {
 	delete[] boxs_data;
-	delete button_clicked;
+	delete button_for_calculate;
+    delete button_for_randomize;
 	delete[] verticals;
-    delete horisontal_mian;
+    delete horisontal_for_boxs;
+    delete horisontal_for_bottom_buttons;
 }

@@ -12,6 +12,8 @@ public:
 	int x{ 0 }, y{ 0 }, z{ 0 };
 	float real{ 0.0 };
 	float distance{ 0.0 };
+	bool white = false;
+	bool blue = false;
 	node* next = nullptr;
 
 	node(int x, int y, int z, float real, float distance) :x(x), y(y), z(z), real(real), distance(distance) {};

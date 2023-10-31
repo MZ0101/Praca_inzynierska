@@ -22,6 +22,7 @@ public:
     QString path = "Dane";
     int size{0};
     int current_l {0}, current_r {0}; 
+    
    
 
     // alokacja dynamiczna
@@ -37,9 +38,16 @@ protected:
     bool eventFilter(QObject* object, QEvent* event) override;
 
     protected slots:
-        void previous_r();
-        void another_r();
-        void previous_l();
-        void another_l();
+        //void previous_r();
+        //void another_r();
+        //void previous_l();
+        //void another_l();
+       
+
+        void previous();
+        void another();
+        
+
+        //void image_change();
         void if_z_value_changed();
 };

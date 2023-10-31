@@ -128,7 +128,7 @@ void Main_class::series_10_ch()
                 });
         }
 
-        QObject::connect(this->series_10->button_clicked, &QPushButton::clicked, this, &Main_class::result_10_create);
+        QObject::connect(this->series_10->button_for_calculate, &QPushButton::clicked, this, &Main_class::result_10_create);
     }
    
     this->control_widget->widget_array[1] = this->series_10;
@@ -237,13 +237,7 @@ void Main_class::calculation()
                    
                     execute->Executive();
 
-                    for (size_t z = 0; z < 208; z++) {
-                        for (size_t x = 0; x < 200; x++) {
-                            for (size_t y = 0; y < 200; y++) {
-                                execute->nodes[z][x][y].next = nullptr;
-                            }
-                        }
-                    }
+                   
 
                     value = execute->nodes[this->end[2]][this->end[0]][this->end[1]].real;
                     this->result_10->max_series++;
@@ -284,9 +278,9 @@ void Main_class::calculation()
 
             if (execute->Reload(this->begin, this->end))
             {
-               // execute->result_path = this->result_path;
+                qDebug() << "calculation_on";
                 execute->Executive();
-               
+                qDebug() << "calculation_off";
                 this->average_way = execute->nodes[this->end[2]][this->end[0]][this->end[1]].real;
             }
             
@@ -298,17 +292,17 @@ void Main_class::calculation()
 
 void Main_class::mark_connect()
 {
-    if (this->mark->boxs[0].edit[2].text().toInt() > this->mark->boxs[1].edit[2].text().toInt())
-    {
-        QMessageBox informacja;
-        informacja.setWindowTitle("Warning");
-        informacja.setText(QString("Begining (z) > End (z)"));
-        informacja.setIcon(QMessageBox::Warning);
-        informacja.exec();
+    //if (this->mark->boxs[0].edit[2].text().toInt() > this->mark->boxs[1].edit[2].text().toInt())
+    //{
+    //    QMessageBox informacja;
+    //    informacja.setWindowTitle("Warning");
+    //    informacja.setText(QString("Begining (z) > End (z)"));
+    //    informacja.setIcon(QMessageBox::Warning);
+    //    informacja.exec();
 
-    }
-    else
-    {
+    //}
+    //else
+    //{
         this->mark->hide();
         this->control_widget->show();
 
@@ -330,7 +324,7 @@ void Main_class::mark_connect()
                 this->series_10->boxs_data[this->series_10->button_number].end_labels[i].setText(this->mark->boxs[1].edit[i].text());
             }
         }
-    }
+   // }
 }
 
 Main_class::~Main_class()

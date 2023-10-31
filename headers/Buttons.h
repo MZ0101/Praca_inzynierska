@@ -3,7 +3,7 @@
 #include <QWidget>
 class Buttons :public QPushButton
 {
-    //Q_OBJECT
+    Q_OBJECT
 
 public:
     Buttons();

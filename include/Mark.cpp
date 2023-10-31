@@ -11,7 +11,7 @@ Mark::Mark(QWidget *parent) : QWidget(parent)
     
     QString boxs_namse[2] = { "Begining","End" };
 
-    void(Mark:: * functions[4]) () = { &Mark::previous_l, &Mark::another_l,&Mark::previous_r, &Mark::another_r};
+   // void(Mark:: * functions[4]) () = { &Mark::previous_l, &Mark::another_l,&Mark::previous_r, &Mark::another_r};
 
     this->boxs = new Box_for_mark[2];
     //this->boxs = new Pudelko_wybieranie[2];
@@ -25,8 +25,12 @@ Mark::Mark(QWidget *parent) : QWidget(parent)
         this->boxs[i].label_image->setMouseTracking(true);
         QObject::connect(&this->boxs[i].edit[2], SIGNAL(textChanged(const QString&)), this, SLOT(if_z_value_changed()));
 
-        QObject::connect(&(this->boxs[0].buttons[i]), &QPushButton::clicked, this, functions[i]);
-        QObject::connect(&(this->boxs[1].buttons[i]), &QPushButton::clicked, this, functions[i+2]);
+       // QObject::connect(&(this->boxs[0].buttons[i]), &QPushButton::clicked, this, functions[i + 2]);
+        //QObject::connect(&(this->boxs[1].buttons[i]), &QPushButton::clicked, this, functions[i+2]);
+
+         QObject::connect(&(this->boxs[i].buttons[0]), &QPushButton::clicked, this, &Mark::previous );
+         QObject::connect(&(this->boxs[i].buttons[1]), &QPushButton::clicked, this, &Mark::another);
+
 
         this->image[i].load(this->path + this->files_list[0]);
         this->boxs[i].label_image->setPixmap(QPixmap::fromImage(this->image[i]).scaled(QSize(800, 800), Qt::KeepAspectRatio));
@@ -49,42 +53,80 @@ Mark::Mark(QWidget *parent) : QWidget(parent)
     this->setWindowFlags(this->windowFlags() & ~Qt::WindowMaximizeButtonHint);
 }
 
-void Mark::previous_l()
+void Mark::previous()
 {
-    if (this->current_l > 0)
+
+    Buttons* box_buttons_clicked = qobject_cast<Buttons *>(sender());
+
+    if (box_buttons_clicked == &this->boxs[0].buttons[0])
     {
-        this->current_l--;
-       // this->process(this->current_l, 0);
-        this->boxs[0].edit[2].setText(QString::number(this->current_l));
+        if (this->current_l > 0)
+        {
+            this->current_l--;
+
+            this->boxs[0].edit[2].setText(QString::number(this->current_l));
+        }
     }
+
+    else  
+    {
+        if (this->current_r > 0)
+        {
+            this->current_r--;
+
+            this->boxs[1].edit[2].setText(QString::number(this->current_r));
+        }
+    }
+
+
+   
 }
-void Mark::another_l()
+void Mark::another()
 {
-    if (this->current_l < this->current_r)
+    Buttons* box_buttons_clicked = qobject_cast<Buttons*>(sender());
+    
+    if (box_buttons_clicked == &this->boxs[0].buttons[1])
     {
-        this->current_l++;
-        this->boxs[0].edit[2].setText(QString::number(this->current_l));
-        //this->process(this->current_l, 0);
+        if (this->current_l < this->size)
+        {
+            this->current_l++;
+            this->boxs[0].edit[2].setText(QString::number(this->current_l));
+
+        }
+
     }
-}
-void Mark::previous_r()
-{
-    if (this->current_r > this->current_l)
+
+    else
     {
-        this->current_r--;
-        //this->process(this->current_r, 1);
-        this->boxs[1].edit[2].setText(QString::number(this->current_r));
+        if (this->current_r < this->size)
+        {
+            this->current_r++;
+            this->boxs[1].edit[2].setText(QString::number(this->current_r));
+
+        }
+
     }
+
 }
-void Mark::another_r()
-{
-    if (this->current_r < this->size)
-    {
-        this->current_r++;
-        this->boxs[1].edit[2].setText(QString::number(this->current_r));
-        //this->process(this->current_r,1);
-    }
-}
+
+//void Mark::previous_r()
+//{
+//    if (this->current_r > this->current_l)
+//    {
+//        this->current_r--;
+//        this->process(this->current_r, 1);
+//        this->boxs[1].edit[2].setText(QString::number(this->current_r));
+//    }
+//}
+//void Mark::another_r()
+//{
+//    if (this->current_r < this->size)
+//    {
+//        this->current_r++;
+//        this->boxs[1].edit[2].setText(QString::number(this->current_r));
+//        this->process(this->current_r,1);
+//    }
+//}
 
 
 
@@ -145,6 +187,7 @@ void Mark::if_z_value_changed()
         z_value = this->boxs[1].edit[2].text().toUInt();
         number = 1;
     }
+
     if (z_value <= this->size && z_value > 0)
     {
         //(number == 0) ? this->current_l = z_value : this->current_r = z_value;
