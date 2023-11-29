@@ -50,19 +50,6 @@ public:
 
 	int current_widget{ 0 };
 
-	//QGroupBox* box_for_calculation = nullptr;
-	//QHBoxLayout* horisontal_box = nullptr;
-	//Buttons *buttons_box = nullptr;
-	//Label *method_label_box = nullptr;
-	//std::map<int, QString> method_label =  { {0,"Dajkstra"}, {1,"Total A*"}, {2, "Euklides A*"}};
-	//std::map<int, QString> files_path = {};
-	//int current_method{ 0 };
-
-	
-
-	/*void previous_method();
-	void another_method();*/
-
 protected:
 
 	void previous_widget();

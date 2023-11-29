@@ -20,12 +20,14 @@ public:
   
     int current_series{ 0 };
     int max_series{ -1 };
-    int series_array[9] = {};
+    int series_array[10] = {};
+    unsigned long int NumberOfVisitedNodesArray[10] = {0};
 
-public:
-    inline void image_change();
-    void image_remove();
-protected:
+    void ChangingTheDisplayedImage();
+    void ReamoveImageFromFolder();
+
+    void SettingLayoutStylesIfNotCorrectResults();
+    
     void previous();
     void andother();
 

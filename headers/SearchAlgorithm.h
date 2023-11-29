@@ -5,6 +5,7 @@
 #include <queue>
 #include <QDir>
 #include <QString>
+#include <array>
 
 struct node
 {
@@ -32,7 +33,7 @@ public:
 
 	Algorithm_base(int current_search_type = 0);
 	
-	~Algorithm_base() {};
+	~Algorithm_base() ;
 
 	int choice_calculation{ 0 };
 	QRgb pixel_color;
@@ -41,13 +42,17 @@ public:
 	float heuristics{ 0.0 };
 	float deltax{ 0.0 }, deltay{ 0.0 }, deltaz{ 0.0 };
 	int images_number{ 0 };
+	int width, height;
+
+	unsigned long int NumberOfVisitedNodes{ 0 };
 
 	QString result_path = "Result_1";
 	QString file_path = "Dane";
 
 	QStringList files;
 	node* auxiliary = nullptr;
-	node nodes[208][200][200];
+	node *** nodes;
+
 
 	QImage* images = nullptr;
 

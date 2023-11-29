@@ -7,6 +7,7 @@
 #include "Label.h"
 #include "LineEdit.h"
 #include "Buttons.h"
+#include "View.h"
 
 class Box_for_mark : public QGroupBox
 {
@@ -16,7 +17,8 @@ public:
 	~Box_for_mark();
 
 	Label *files_name = nullptr;
-	Label *label_image = nullptr;
+	//Label *label_image = nullptr;
+	View* ViewForImage = nullptr;
 	Label *data_labels = nullptr;
 	LineEdit *edit = nullptr;
 	Buttons *buttons = nullptr;
@@ -24,8 +26,4 @@ public:
 	QHBoxLayout *h_layouts = nullptr;
 	QVBoxLayout *v_layout = nullptr;
 
-protected:
-	//void mousePressEvent(QMouseEvent* event) override;
-
 };
-

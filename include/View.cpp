@@ -2,13 +2,17 @@
 
 View::View(QWidget* parent) : QGraphicsView(parent)
 {
-    this->setRenderHint(QPainter::Antialiasing);
-    this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-    this->setDragMode(QGraphicsView::ScrollHandDrag);
-    this->setInteractive(true);
-    this->FullViewportUpdate;
+   this->setRenderHint(QPainter::Antialiasing);
 
-    this->setAlignment(Qt::AlignCenter);
+   this->setAlignment(Qt::AlignCenter);
+   
+    
+     this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+     this->setDragMode(QGraphicsView::NoDrag);
+    //this->setDragMode(QGraphicsView::ScrollHandDrag);
+    this->setInteractive(true);
+   // this->FullViewportUpdate;
+    
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
    // this->scenea = new QGraphicsScene(this);
@@ -17,11 +21,12 @@ View::View(QWidget* parent) : QGraphicsView(parent)
 
     this->setStyleSheet("background-color: white; border : 1px solid black;");
 
-    this->setFixedSize(1000,800);
+    this->setFixedSize(800,800);
 }
 
 void View::wheelEvent(QWheelEvent *while_event)
 {
+
     QPointF mouse_pos = while_event->position();
 
     QPointF mouse_on_scene_pos = mapToScene(mouse_pos.toPoint());
@@ -45,5 +50,6 @@ void View::wheelEvent(QWheelEvent *while_event)
 
     this->horizontalScrollBar()->setValue(this->horizontalScrollBar()->value() + new_mouse_pos_on_scene.x());
     this->verticalScrollBar()->setValue(this->verticalScrollBar()->value() + new_mouse_pos_on_scene.y());
+
     while_event->accept();
 }

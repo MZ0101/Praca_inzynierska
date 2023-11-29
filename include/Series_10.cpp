@@ -23,8 +23,9 @@ Series_10::Series_10(QWidget* parent) : QWidget(parent)
 
     this->horisontal_for_bottom_buttons = new QHBoxLayout();
 
-    this->horisontal_for_bottom_buttons->addWidget(this->button_for_calculate);
     this->horisontal_for_bottom_buttons->addWidget(this->button_for_randomize);
+    this->horisontal_for_bottom_buttons->addWidget(this->button_for_calculate);
+    
 
 
     for (size_t i{ 0 }; i < 10; i++)
@@ -71,49 +72,58 @@ void Series_10::randomization_of_points()
 
     QDir dir("Dane");
     QStringList files_list = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
-    QImage image;
-    files_list.erase(files_list.begin());
+
+    int SizeImagesList = files_list.size();
+
+    QImage ImageForRandomize("Dane//" + files_list[0]);
+
+    int ImageWidth = ImageForRandomize.width();
+    int ImageHeight = ImageForRandomize.height();
+    
+   
    
     int begin[3] = { 0,0,0 };
     int end[3] = { 0,0,0 };
-
+    
  
         for (int i{ 0 }; i < 10; i++)
         {
             QRgb pixel_color;
+            int ImageNumberDifference{ 0 };
 
-            do
+            while (ImageNumberDifference < 10)
             {
-                begin[0] = std::rand() % 200;
-                begin[1] = std::rand() % 200;
-                begin[2] = std::rand() % 208;
+                do
+                {
+                    begin[0] = std::rand() % ImageWidth;
+                    begin[1] = std::rand() % ImageHeight;
+                    begin[2] = std::rand() % SizeImagesList;
 
-                image.load("Dane//" + files_list[begin[2]]);
-                pixel_color = image.color(image.pixelIndex(begin[0], begin[1]));
-              
+                    ImageForRandomize.load("Dane//" + files_list[begin[2]]);
+                    pixel_color = ImageForRandomize.color(ImageForRandomize.pixelIndex(begin[0], begin[1]));
+
+                } while (qRed(pixel_color) != 255 && qBlue(pixel_color) != 255 && qGreen(pixel_color) != 255);
+
+
+                do
+                {
+                    end[0] = std::rand() % ImageWidth;
+                    end[1] = std::rand() % ImageHeight;
+                    end[2] = std::rand() % SizeImagesList;
+
+                    ImageForRandomize.load("Dane//" + files_list[end[2]]);
+                    pixel_color = ImageForRandomize.color(ImageForRandomize.pixelIndex(end[0], end[1]));
+
+                } while (qRed(pixel_color) != 255 && qBlue(pixel_color) != 255 && qGreen(pixel_color) != 255);
+
+                ImageNumberDifference = std::abs(begin[2] - end[2]);
             }
-            while (qRed(pixel_color)  != 255 && qBlue(pixel_color) != 255 && qGreen(pixel_color) != 255);
-       
-
-            do
-            {
-                end[0] = std::rand() % 200;
-                end[1] = std::rand() % 200;
-                end[2] = std::rand() % 208;
-
-                image.load("Dane//" + files_list[end[2]]);
-                pixel_color = image.color(image.pixelIndex(end[0], end[1]));
-               
-            } while (qRed(pixel_color) != 255 && qBlue(pixel_color) != 255 && qGreen(pixel_color) != 255);
-
-       
+            
             for (size_t b{ 0 }; b < 3; b++)
             {
                 this->boxs_data[i].begin_labels[b].setText(QString::number(begin[b]));
                 this->boxs_data[i].end_labels[b].setText(QString::number(end[b]));
             }
-
-            
 
         }
 }

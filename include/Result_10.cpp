@@ -19,20 +19,17 @@ Result_10::Result_10(QWidget* parent) : QWidget(parent)
 
 	this->series_labels = new Label[12];
 	this->vertical.addWidget(&this->series_labels[11]);
-
+	
 	this->series_labels[11].setText("Resulsts");
 	this->box_on_result.setAlignment(Qt::AlignHCenter);
 
 	for (size_t i{ 0 }; i < 11; i++)
 	{
 		this->vertical.addWidget(&this->series_labels[i]);
-		//this->series_labels[i].setText("Series " + QString::number(i)+": ");
 	}
 	
 	this->main_result = new Result_1(this, this->files_path + "0");
 	this->main_result->image_reload();
-	this->main_result->main_layout.removeItem(&this->main_result->hlayout);
-	this->main_result->result.hide();
 
 	this->box_on_result.setLayout(&this->vertical);
 	this->main_layout->addWidget(&this->box_on_result);
@@ -46,7 +43,8 @@ void Result_10::previous()
 	{
 		this->series_labels[this->current_series].setStyleSheet("background-color: white; border : 2px solid grey;");
 		this->current_series--;
-		this->image_change();
+
+		this->ChangingTheDisplayedImage();
 	}
 }
 void Result_10::andother()
@@ -54,12 +52,15 @@ void Result_10::andother()
 	if (this->current_series < this->max_series)
 	{
 		this->series_labels[this->current_series].setStyleSheet("background-color: white; border : 2px solid grey;");
+		
 		this->current_series++;
 
-		this->image_change();
+		this->ChangingTheDisplayedImage();
 	}
 }
-inline void Result_10::image_change()
+
+
+ void Result_10::ChangingTheDisplayedImage()
 {
 	this->main_result->current_image_index = 0;
 	this->main_result->files_path = this->files_path + QString::number(this->series_array[this->current_series]);
@@ -78,17 +79,28 @@ inline void Result_10::image_change()
 	}
 	this->series_labels[this->current_series].setStyleSheet("background-color: white; border : 2px solid green; font-weight: bold;");
 
-
-	for (int i{ this->max_series + 1 }; i < 9; i++)
-	{
-
-		this->series_labels[i].setText("EMPTY");
-		this->series_labels[i].setStyleSheet("background-color: white; border : 2px solid red;");
-	}
-
+	this->main_result->LayoutForNumberOfVisitedNodes.setText("Visited Nodes: " + QString::number(this->NumberOfVisitedNodesArray[this->current_series]));
 }
 
-void Result_10::image_remove()
+ void Result_10::SettingLayoutStylesIfNotCorrectResults()
+ {
+	 this->main_result->LayoutForResult.setText("EMPTY");
+	 this->main_result->LayoutForResult.setStyleSheet("background-color: white; border : 2px solid red;");
+
+	 this->main_result->LayoutForGeometricTortuosity.setText("EMPTY");
+	 this->main_result->LayoutForGeometricTortuosity.setStyleSheet("background-color: white; border : 2px solid red;");
+
+	 this->main_result->LayoutForGeometricTortuosity.setText("EMPTY");
+	 this->main_result->LayoutForGeometricTortuosity.setStyleSheet("background-color: white; border : 2px solid red;");
+
+	 for (int i{ 0 }; i < 9; i++)
+	 {
+		 series_labels[this->current_series].setStyleSheet("background-color: white; border : 2px solid green; font-weight: bold;");
+	 }
+ }
+
+
+void Result_10::ReamoveImageFromFolder()
 {
 #include <QFile>
 

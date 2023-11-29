@@ -15,7 +15,7 @@ Box_for_10_series::Box_for_10_series(QWidget* parent) : QGroupBox(parent)
     this->setLayout(this->main_horisontal);
 
     QString e_name[2] = { "Start data:", "Target data:" };
-    QString p_name[4] = { "Etykiety", "Width (x)", "Height (y)", "Picture number (z)" };
+    QString p_name[4] = { "Labels", "Width (x)", "Height (y)", "Picture number (z)" };
 
     for (size_t i{ 0 }; i < 4; i++)
     {

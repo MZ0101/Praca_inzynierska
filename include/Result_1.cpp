@@ -7,25 +7,36 @@ Result_1::Result_1(QWidget* parent , QString path) : QWidget(parent)
     this->setFocus();
     this->setFocusPolicy(Qt::StrongFocus);
 
-    this->hlayout.addWidget(&this->result);
-    this->hlayout.setAlignment(&this->result, Qt::AlignHCenter);
+    this->hlayout.addWidget(&this->LayoutForResult);
+    this->hlayout.addWidget(&this->LayoutForGeometricTortuosity);
+    this->hlayout.addWidget(&this->LayoutForNumberOfVisitedNodes);
 
-    this->result.setFixedSize(200,25);
-    this->result.setFont(QFont("Arial", 11));
+    this->hlayout.setAlignment( Qt::AlignHCenter);
+
+    this->LayoutForResult.setFixedSize(225,25);
+    this->LayoutForResult.setFont(QFont("Arial", 11));
+
+    this->LayoutForGeometricTortuosity.setFixedSize(230, 25);
+    this->LayoutForGeometricTortuosity.setFont(QFont("Arial", 11));
+
+    this->LayoutForNumberOfVisitedNodes.setFixedSize(250, 25);
+    this->LayoutForNumberOfVisitedNodes.setFont(QFont("Arial", 11));
+
 
     this->image_name.setFixedSize(225, 25);
     this->image_name.setFont(QFont("Arial", 11));
     this->image_name.setStyleSheet("background-color: white; border: 1px solid black; font-weight: bold;");
 
+    
+
     this->main_hlayout.setAlignment(Qt::AlignHCenter);
 
-    QStringList names = { "Beginning","Previous","Another","End" };
-    void (Result_1:: * functions[4])() = { &Result_1::begin,&Result_1::previous,&Result_1::another, &Result_1::end };
-
+    QStringList ButtonsNamesForChangeDisplayImage = { "Beginning","Previous","Another","End" };
+   
 
     for (size_t i{ 0 }; i < 4; i++)
     {
-        this->buttons[i].setText(names[i]);
+        this->buttons[i].setText(ButtonsNamesForChangeDisplayImage[i]);
         this->main_hlayout.addWidget(&this->buttons[i]);
         if (i == 1)
         {
@@ -34,30 +45,20 @@ Result_1::Result_1(QWidget* parent , QString path) : QWidget(parent)
             
         }
             
-        QObject::connect(&this->buttons[i], &QPushButton::clicked, this, functions[i]);
+        QObject::connect(&this->buttons[i], &QPushButton::clicked, this, &Result_1::ChangingTheDisplayedImage);
     }
 
     this->main_layout.addLayout(&this->hlayout);
     this->main_layout.addLayout(&this->main_hlayout);
     this->main_layout.addWidget(&this->image_view);
     this->setLayout(&this->main_layout);
+
+    this->image_view.setDragMode(QGraphicsView::ScrollHandDrag);
 }
 
 bool Result_1::event(QEvent* event) 
 {
-    if (event->type() == QEvent::KeyPress)
-    {
-        QKeyEvent* key_event = static_cast<QKeyEvent*>(event);
-        if (key_event->key() == Qt::Key_Left)
-        {
-            this->previous();
-        }
-        else if (key_event->key() == Qt::Key_Right)
-        {
-            this->another();
-        }
-    }
-    else if (event->type() == QEvent::Wheel)
+    if (event->type() == QEvent::Wheel)
     {
 
         this->image_view.wheelEvent(static_cast<QWheelEvent*>(event));
@@ -66,40 +67,64 @@ bool Result_1::event(QEvent* event)
     return QWidget::event(event);
 }
 
-void Result_1::end()
+void Result_1::ChangingTheDisplayedImage()
 {
-    if (this->files_list.size() > 0)
+
+    QObject* ButtonThatSendTheSignal = sender();
+    
+    int ButtonNumber{ 0 };
+
+    for (int i{0}; i < 4; i++)
     {
-        this->current_image_index = this->max_image_index;
-        processing();
+        if (ButtonThatSendTheSignal == &this->buttons[i])
+        {
+            ButtonNumber = i;
+        }
     }
-}
-void Result_1::previous()
-{
-    if (this->current_image_index > 0)
-    {
-        this->current_image_index--;
-        processing();
-    }
-}
-void Result_1::another()
-{
-    if (this->current_image_index < this->max_image_index)
-    {
-        this->current_image_index++;
-        processing();
-    }
-}
-void Result_1::begin()
-{
-    if (this->files_list.size() > 0)
-    {
-        this->current_image_index = 0;
-        processing();
-    }
+
+    UpdatingTheDisplayedImageNumber(ButtonNumber);
+
+    processing();
 }
 
-inline void Result_1::processing()
+void Result_1::UpdatingTheDisplayedImageNumber(int& ButtonNumber)
+{
+    
+    if (ButtonNumber == 0)
+    {
+        if (this->max_image_index > 0)
+        {
+            this->current_image_index = this->max_image_index;
+        }
+    }
+    else if (ButtonNumber == 1)
+    {
+
+        if (this->current_image_index > 0)
+        {
+            this->current_image_index--;
+        }
+    }
+    else if (ButtonNumber == 2)
+    {
+        if (this->current_image_index < this->max_image_index)
+        {
+            this->current_image_index++;
+
+        }
+    }
+
+    else
+    {
+        if (this->max_image_index > 0)
+        {
+            this->current_image_index = 0;
+        }
+    }
+       
+}
+
+void Result_1::processing()
 {
     this->scene = this->image_view.scene();
     this->pixmapItem = dynamic_cast<QGraphicsPixmapItem*>(scene->items().first());
@@ -121,7 +146,6 @@ void Result_1::image_reamove()
     QDir dir{};
     QStringList files_list = {};
 
-   
         files_path = this->files_path;
         files_path = files_path ;
         dir.setPath(files_path);
@@ -135,8 +159,6 @@ void Result_1::image_reamove()
             QFile file(dir.filePath(file_name));
 
             file.remove();
-
-        
     }
 }
 void Result_1::image_reload()
@@ -155,9 +177,9 @@ void Result_1::image_reload()
         this->image_view.scene_v.addPixmap(QPixmap::fromImage(this->image).scaled(800, 800));
         this->image_name.setText("Image name : " + this->files_list[this->current_image_index]);
 
-
-        this->result.setStyleSheet("background-color: white; border: 2px solid green; font-weight: bold;");
-       
+        this->LayoutForResult.setStyleSheet("background-color: white; border: 2px solid green; font-weight: bold;");
+        this->LayoutForGeometricTortuosity.setStyleSheet("background-color: white; border: 2px solid green; font-weight: bold;");
+        this->LayoutForNumberOfVisitedNodes.setStyleSheet("background-color: white; border: 2px solid green; font-weight: bold;");
     }
     else
     {
@@ -166,6 +188,8 @@ void Result_1::image_reload()
         this->image_view.scene_v.addPixmap(QPixmap::fromImage(this->image).scaled(800, 800));
         this->image_name.setText("Image name: Empty");
 
-        this->result.setStyleSheet("background-color: white; border: 2px solid red; font-weight: bold;");
+        this->LayoutForResult.setStyleSheet("background-color: white; border: 2px solid red; font-weight: bold;");
+        this->LayoutForGeometricTortuosity.setStyleSheet("background-color: white; border: 2px solid red; font-weight: bold;");
+        this->LayoutForNumberOfVisitedNodes.setStyleSheet("background-color: white; border: 2px solid red; font-weight: bold;");
     }
 }

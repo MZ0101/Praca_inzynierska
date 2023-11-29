@@ -2,219 +2,235 @@
 
 Mark::Mark(QWidget *parent) : QWidget(parent)
 {
-    this->dir.setPath(this->path);
-    this->files_list = this->dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
-    this->files_list.erase(this->files_list.begin());
-    this->size = this->files_list.size()-1;
 
-    this->path += "//";
-    
-    QString boxs_namse[2] = { "Begining","End" };
+    QString BoxsForMarkBeginAndEndPoint_Name[2] = { "Begining Data","End Data" };
 
-   // void(Mark:: * functions[4]) () = { &Mark::previous_l, &Mark::another_l,&Mark::previous_r, &Mark::another_r};
+    this->BoxsForMarkBeginAndEndPoint = new Box_for_mark[2];
+    this->HorisontalLayoutForBoxsForMark = new QHBoxLayout();
+    this->MainVerticalLayoutForAllItems = new QVBoxLayout();
+    this->ButtonForConfirm = new Buttons();
+    this->ButtonsHorisontalLayout = new QHBoxLayout();
 
-    this->boxs = new Box_for_mark[2];
-    //this->boxs = new Pudelko_wybieranie[2];
+    this->LoadImagesNameFromDir();
 
-    this->horisontal = new QHBoxLayout();
+    this->CheckImageSizeAndChangeViewSize();
 
     for (size_t i{ 0 }; i < 2; i++)
     {
-        this->boxs[i].setTitle(boxs_namse[i]);
-        this->boxs[i].label_image->installEventFilter(this);
-        this->boxs[i].label_image->setMouseTracking(true);
-        QObject::connect(&this->boxs[i].edit[2], SIGNAL(textChanged(const QString&)), this, SLOT(if_z_value_changed()));
+        this->BoxsForMarkBeginAndEndPoint[i].setTitle(BoxsForMarkBeginAndEndPoint_Name[i]);
+        this->BoxsForMarkBeginAndEndPoint[i].ViewForImage->installEventFilter(this);
+       
+        QObject::connect(&(this->BoxsForMarkBeginAndEndPoint[i].buttons[0]), &QPushButton::clicked, this, &Mark::ChangeToThePreviousImage);
+        QObject::connect(&(this->BoxsForMarkBeginAndEndPoint[i].buttons[1]), &QPushButton::clicked, this, &Mark::ChangeToTheNextImage);
 
-       // QObject::connect(&(this->boxs[0].buttons[i]), &QPushButton::clicked, this, functions[i + 2]);
-        //QObject::connect(&(this->boxs[1].buttons[i]), &QPushButton::clicked, this, functions[i+2]);
+        QObject::connect(&this->BoxsForMarkBeginAndEndPoint[i].edit[2], SIGNAL(textChanged(const QString&)), this, SLOT(ImageChangeIfTheImageNumberChanged()));
 
-         QObject::connect(&(this->boxs[i].buttons[0]), &QPushButton::clicked, this, &Mark::previous );
-         QObject::connect(&(this->boxs[i].buttons[1]), &QPushButton::clicked, this, &Mark::another);
-
-
-        this->image[i].load(this->path + this->files_list[0]);
-        this->boxs[i].label_image->setPixmap(QPixmap::fromImage(this->image[i]).scaled(QSize(800, 800), Qt::KeepAspectRatio));
-        this->boxs[i].files_name->setText(this->files_list[0]);
-        
-        this->horisontal->addWidget(&this->boxs[i]);
+        this->BoxsForMarkBeginAndEndPoint[i].files_name->setText(this->ImageNameList[0]);
+       
+        this->HorisontalLayoutForBoxsForMark->addWidget(&this->BoxsForMarkBeginAndEndPoint[i]);
     }
 
-    this->vertical = new QVBoxLayout(this);
-    this->button = new Buttons();
-    this->b_horisontal = new QHBoxLayout();
-    this->b_horisontal->setAlignment(Qt::AlignCenter);
-    this->b_horisontal->addWidget(this->button);
+    this->ButtonsHorisontalLayout->setAlignment(Qt::AlignCenter);
+    this->ButtonsHorisontalLayout->addWidget(this->ButtonForConfirm);
 
-    this->button->setText("Confirm");
-    this->vertical->addLayout(this->b_horisontal);
-    this->vertical->addLayout(this->horisontal);
+    this->ButtonForConfirm->setText("Confirm");
+    this->MainVerticalLayoutForAllItems->addLayout(this->ButtonsHorisontalLayout);
+    this->MainVerticalLayoutForAllItems->addLayout(this->HorisontalLayoutForBoxsForMark);
     
-    this->setLayout(this->vertical);
+    this->setLayout(this->MainVerticalLayoutForAllItems);
     this->setWindowFlags(this->windowFlags() & ~Qt::WindowMaximizeButtonHint);
 }
 
-void Mark::previous()
+void Mark::LoadImagesNameFromDir()
+{
+    
+    this->dir.setPath(this->PathToTheSourceImagesFolder);
+    this->ImageNameList = this->dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+    this->MaxImageNumber = this->ImageNameList.size() - 1;
+
+    this->PathToTheSourceImagesFolder += "//";
+}
+
+void Mark::CheckImageSizeAndChangeViewSize()
+{
+    QImage ImageForChangeViewSize(this->PathToTheSourceImagesFolder + this->ImageNameList[0]);
+
+    this->WidthScaleForImage = this->BoxsForMarkBeginAndEndPoint[0].ViewForImage->width() / ImageForChangeViewSize.width();
+    this->HeightScaleForImage = this->BoxsForMarkBeginAndEndPoint[0].ViewForImage->height() / ImageForChangeViewSize.height();
+
+    if (this->WidthScaleForImage <= 1 || this->HeightScaleForImage <= 1)
+    {
+        this->WidthScaleForImage = 1;
+        this->HeightScaleForImage = 1;
+    }
+
+    this->ImageWidth = ImageForChangeViewSize.width() * this->WidthScaleForImage;
+    this->ImageHeight = ImageForChangeViewSize.height() * this->WidthScaleForImage;
+
+    QPixmap PixMapForSceneOnViews = QPixmap::fromImage(ImageForChangeViewSize.scaled(this->ImageWidth, this->ImageHeight));
+
+    for (int i{ 0 }; i < 2; i++)
+    {
+
+        QGraphicsPixmapItem* PixMapForSceneOnViewsItem = this->BoxsForMarkBeginAndEndPoint[i].ViewForImage->scene()->addPixmap(PixMapForSceneOnViews);
+        this->ImagesForMark[i].load(this->PathToTheSourceImagesFolder + this->ImageNameList[0]);
+
+        this->BoxsForMarkBeginAndEndPoint[i].ViewForImage->setFixedSize(this->ImageWidth, this->ImageHeight);
+        this->BoxsForMarkBeginAndEndPoint[i].ViewForImage->scene_v.setSceneRect(0, 0, this->ImageWidth, this->ImageHeight);
+
+    }
+}
+
+void Mark::ChangeToThePreviousImage()
 {
 
     Buttons* box_buttons_clicked = qobject_cast<Buttons *>(sender());
 
-    if (box_buttons_clicked == &this->boxs[0].buttons[0])
+    if (box_buttons_clicked == &this->BoxsForMarkBeginAndEndPoint[0].buttons[0])
     {
-        if (this->current_l > 0)
+        if (this->CurrentLeftImageNumber > 0)
         {
-            this->current_l--;
+            this->CurrentLeftImageNumber--;
 
-            this->boxs[0].edit[2].setText(QString::number(this->current_l));
+            this->BoxsForMarkBeginAndEndPoint[0].edit[2].setText(QString::number(this->CurrentLeftImageNumber));
         }
     }
 
     else  
     {
-        if (this->current_r > 0)
+        if (this->CurrentRightImageNumber > 0)
         {
-            this->current_r--;
+            this->CurrentRightImageNumber--;
 
-            this->boxs[1].edit[2].setText(QString::number(this->current_r));
+            this->BoxsForMarkBeginAndEndPoint[1].edit[2].setText(QString::number(this->CurrentRightImageNumber));
         }
     }
-
-
-   
 }
-void Mark::another()
+
+void Mark::ChangeToTheNextImage()
 {
-    Buttons* box_buttons_clicked = qobject_cast<Buttons*>(sender());
+    Buttons* BoxButtonsClicked = qobject_cast<Buttons*>(sender());
     
-    if (box_buttons_clicked == &this->boxs[0].buttons[1])
+    if (BoxButtonsClicked == &this->BoxsForMarkBeginAndEndPoint[0].buttons[1])
     {
-        if (this->current_l < this->size)
+        if (this->CurrentLeftImageNumber < this->MaxImageNumber)
         {
-            this->current_l++;
-            this->boxs[0].edit[2].setText(QString::number(this->current_l));
-
+            this->CurrentLeftImageNumber++;
+            this->BoxsForMarkBeginAndEndPoint[0].edit[2].setText(QString::number(this->CurrentLeftImageNumber));
         }
-
     }
 
     else
     {
-        if (this->current_r < this->size)
+        if (this->CurrentRightImageNumber < this->MaxImageNumber)
         {
-            this->current_r++;
-            this->boxs[1].edit[2].setText(QString::number(this->current_r));
+            this->CurrentRightImageNumber++;
+            this->BoxsForMarkBeginAndEndPoint[1].edit[2].setText(QString::number(this->CurrentRightImageNumber));
 
         }
-
     }
 
 }
 
-//void Mark::previous_r()
-//{
-//    if (this->current_r > this->current_l)
-//    {
-//        this->current_r--;
-//        this->process(this->current_r, 1);
-//        this->boxs[1].edit[2].setText(QString::number(this->current_r));
-//    }
-//}
-//void Mark::another_r()
-//{
-//    if (this->current_r < this->size)
-//    {
-//        this->current_r++;
-//        this->boxs[1].edit[2].setText(QString::number(this->current_r));
-//        this->process(this->current_r,1);
-//    }
-//}
-
-
-
-bool Mark::eventFilter(QObject* object, QEvent* event)
+void Mark::ImageChangeIfTheImageNumberChanged()
 {
-    if ((this->boxs[0].label_image == object || this->boxs[1].label_image == object) && event->type() == QEvent::MouseButtonPress)
+    QObject* ObjectThatSendTheSignal = sender();
+
+    int NumberBoxThatSendSignal = &this->BoxsForMarkBeginAndEndPoint[0].edit[2] == ObjectThatSendTheSignal ? 0 : 1;
+
+    int ImageNumber = NumberBoxThatSendSignal == 0 ? this->BoxsForMarkBeginAndEndPoint[0].edit[2].text().toUInt() : this->BoxsForMarkBeginAndEndPoint[1].edit[2].text().toUInt();
+
+    if (ImageNumber <= this->MaxImageNumber && ImageNumber > 0)
     {
-        QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
-        int box_number{0};
-        int x = mouse_event->x();
-        int y = mouse_event->y();
-        for (size_t i{ 0 }; i < 2; i++)
+
+        if (NumberBoxThatSendSignal == 0)
         {
-            if (this->boxs[i].label_image == object)
-            {
-                box_number = i;
-            }
+            this->CurrentLeftImageNumber = ImageNumber;
         }
-        QImage image = this->boxs[box_number].label_image->pixmap().toImage();
 
-        QColor current_p = image.pixelColor(x, y);
-
-        if (current_p.red() == 255 && current_p.blue() == 255 && current_p.green() == 255)
+        else
         {
-            int x_original = static_cast<int>(static_cast<double>(x*200 / 800));
-            int y_original = static_cast<int>(static_cast<double>(y*200 / 800 ));
-           
-            image = this->image[box_number].copy();
-            this->boxs[box_number].edit[0].setText(QString::number(x_original));
-            this->boxs[box_number].edit[1].setText(QString::number(y_original));
-
-            //Czerwony
-            image.setColor(2, qRgb(255, 0, 0));
-
-            image.setPixel(x_original,y_original, 2);
-            this->boxs[box_number].label_image->setPixmap(QPixmap());
-            
-            this->boxs[box_number].label_image->setPixmap(QPixmap::fromImage(image).scaled(QSize(800,800), Qt::KeepAspectRatio));
+            this->CurrentRightImageNumber = ImageNumber;
         }
-    }
-    return QWidget::eventFilter(object, event);
-}
 
-void Mark::if_z_value_changed()
-{
-    QObject *obiect_send = sender();
-    int z_value{ 0 };
-    uint number{ 0 };
-
-    if (&this->boxs[0].edit[2] == obiect_send)
-    {
-        z_value = this->boxs[0].edit[2].text().toUInt();
-       // if (z_value > this->boxs[1].edit[2].text().toUInt()) return;
-           
-    }
-    else
-    {
-        z_value = this->boxs[1].edit[2].text().toUInt();
-        number = 1;
-    }
-
-    if (z_value <= this->size && z_value > 0)
-    {
-        //(number == 0) ? this->current_l = z_value : this->current_r = z_value;
-
-        if (number == 0)  this->current_l = z_value;
-        else this->current_r = z_value;
-       
-        this->image[number].load(this->path + this->files_list[z_value]);
-        this->boxs[number].files_name->setText(this->files_list[z_value]);
+        this->ImagesForMark[NumberBoxThatSendSignal].load(this->PathToTheSourceImagesFolder + this->ImageNameList[ImageNumber]);
+        this->BoxsForMarkBeginAndEndPoint[NumberBoxThatSendSignal].files_name->setText(this->ImageNameList[ImageNumber]);
 
         for (uint i{ 0 }; i < 2; i++)
         {
-            this->boxs[number].edit[i].setText("");
+            this->BoxsForMarkBeginAndEndPoint[NumberBoxThatSendSignal].edit[i].setText("");
         }
 
+        this->TempeorarySceneForImageChange = this->BoxsForMarkBeginAndEndPoint[NumberBoxThatSendSignal].ViewForImage->scene();
+        this->PixmapItemForTemporaryScene = dynamic_cast<QGraphicsPixmapItem*>(TempeorarySceneForImageChange->items().first());
 
-        this->boxs[number].label_image->setPixmap(QPixmap::fromImage(this->image[number]).scaled(QSize(800, 800), Qt::KeepAspectRatio));
-        
+        this->PixmapItemForTemporaryScene->setPixmap(QPixmap::fromImage(this->ImagesForMark[NumberBoxThatSendSignal].scaled(QSize(this->ImageWidth, this->ImageHeight))));
     }
+
+}
+
+bool Mark::eventFilter(QObject* object, QEvent* event)
+{
+    if ((this->BoxsForMarkBeginAndEndPoint[0].ViewForImage == object || this->BoxsForMarkBeginAndEndPoint[1].ViewForImage == object) && event->type() == QEvent::MouseButtonPress)
+    {
+        QMouseEvent* MouseEvent = static_cast<QMouseEvent*>(event);
+
+        int NumberBoxThatSendSignal = (this->BoxsForMarkBeginAndEndPoint[0].ViewForImage == object) ? 0 : 1;
+
+        if (MouseEvent->button() == Qt::LeftButton)
+        {
+
+            RetrievingPixelPositionAndCheckingColor(MouseEvent, NumberBoxThatSendSignal);
+            
+        }
+
+    }
+
+    return QWidget::eventFilter(object, event);
+}
+
+void Mark::RetrievingPixelPositionAndCheckingColor(QMouseEvent* MouseEvent, int& NumberBoxThatSendSignal)
+{
+
+    QPointF ClickedPosition = this->BoxsForMarkBeginAndEndPoint[NumberBoxThatSendSignal].ViewForImage->mapToScene(MouseEvent->pos());
+
+    this->TempeorarySceneForImageChange = this->BoxsForMarkBeginAndEndPoint[NumberBoxThatSendSignal].ViewForImage->scene();
+    this->PixmapItemForTemporaryScene = dynamic_cast<QGraphicsPixmapItem*>(this->TempeorarySceneForImageChange->items().first());
+
+    QImage ImageToSelectThePixel = this->PixmapItemForTemporaryScene->pixmap().toImage();
+    QColor CurrentPixel = ImageToSelectThePixel.pixelColor(ClickedPosition.x(), ClickedPosition.y());
+
+    if (CurrentPixel.red() == 255 && CurrentPixel.blue() == 255 && CurrentPixel.green() == 255)
+    {
+        SelectingASelectedPixelAndPoints(ClickedPosition, NumberBoxThatSendSignal);
+    }
+ 
+}
+
+void Mark::SelectingASelectedPixelAndPoints(QPointF& ClickedPosition, int& NumberBoxThatSendSignal)
+{
     
+    int x_original = ClickedPosition.x() / this->WidthScaleForImage;
+    int y_original = ClickedPosition.y() / this->HeightScaleForImage;
+
+    QImage ImageToSelectThePixel = this->ImagesForMark[NumberBoxThatSendSignal].copy();
+    this->BoxsForMarkBeginAndEndPoint[NumberBoxThatSendSignal].edit[0].setText(QString::number(x_original));
+    this->BoxsForMarkBeginAndEndPoint[NumberBoxThatSendSignal].edit[1].setText(QString::number(y_original));
+
+
+    ////Czerwony
+    ImageToSelectThePixel.setColor(6, qRgb(255, 0, 0));
+    ImageToSelectThePixel.setPixel(x_original, y_original, 6);
+
+
+    this->PixmapItemForTemporaryScene->setPixmap(QPixmap::fromImage(ImageToSelectThePixel.scaled(QSize(this->ImageWidth, this->ImageHeight), Qt::KeepAspectRatio)));
 }
 
 Mark::~Mark()
 {
-    delete [] boxs;
-    delete  horisontal;
-    delete button;
-    delete b_horisontal;
-    delete vertical;
+    delete [] BoxsForMarkBeginAndEndPoint;
+    delete  HorisontalLayoutForBoxsForMark;
+    delete ButtonForConfirm;
+    delete ButtonsHorisontalLayout;
+    delete MainVerticalLayoutForAllItems;
 }

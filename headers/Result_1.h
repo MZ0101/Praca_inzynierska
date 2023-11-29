@@ -28,7 +28,9 @@ public:
     QGraphicsScene *scene = nullptr;
     QGraphicsPixmapItem *pixmapItem = nullptr;
     Label image_name;
-    Label result;
+    Label LayoutForResult;
+    Label LayoutForGeometricTortuosity;
+    Label LayoutForNumberOfVisitedNodes;
   
     QHBoxLayout layout_on_result;
     QHBoxLayout hlayout;
@@ -39,14 +41,12 @@ public:
     int current_image_index{ 0 };
     int max_image_index{ 0 };
 
-    inline void processing();
+    void processing();
     void image_reload();
     void image_reamove();
-
-protected:
+    void ChangingTheDisplayedImage();
+    void UpdatingTheDisplayedImageNumber(int& ButtonNumber);
+    
     bool event(QEvent* event) override;
-    void end();
-    void begin();
-    void previous();
-    void another();
+ 
 };

@@ -2,16 +2,37 @@
 
 Algorithm_base::Algorithm_base(int current_search_type)
 {
+	//QDir folder_data("C:\\Users\\mateu\\Downloads\\3values");
 	QDir folder_data("Dane");
 	this->file_path = folder_data.absolutePath();
 	this->file_path = file_path + "//";
 
 	this->files = folder_data.entryList(QDir::Files | QDir::NoDotAndDotDot);
-	this->files.erase(files.begin());
+	//this->files.erase(files.begin());
 
 	if (current_search_type == 0) Search_type = &Algorithm_base::Searching_for_real_value;
 	else if (current_search_type == 1) Search_type = &Algorithm_base::Searching_for_total_value;
 	else if (current_search_type == 2) Search_type = &Algorithm_base::Searching_for_euclidean_value;
+
+	int depth = files.size();
+	this->nodes = new node **[depth];
+	QImage image = QImage(this->file_path + this->files[0]);
+
+	this->width = image.width();
+	this->height = image.height();
+
+
+	for (int z = 0; z < depth; z++)
+	{
+		this->nodes[z] = new node * [this->width];
+
+		for (int x = 0; x < this->width; x++) 
+		{
+			this->nodes[z][x] = new node[this->height];
+		}
+	}
+
+
 	};
 
 
@@ -25,16 +46,19 @@ bool Algorithm_base::Reload(int* begin, int* end)
 	this->begin.y = begin[1];
 	this->begin.z = begin[2];
 
+	this->NumberOfVisitedNodes = 0;
+
 	this->images_number = files.size();
 
 	this->images = new QImage[this->images_number]; 
-	
+
+
 	for (size_t z{ 0 }; z < this->images_number; z++)
 	{
 		this->images[z] = QImage(this->file_path + this->files[z]);
-		for (size_t x{ 0 }; x < 200; x++)
+		for (size_t x{ 0 }; x < this->width; x++)
 		{
-			for (size_t y{ 0 }; y < 200; y++)
+			for (size_t y{ 0 }; y < this->height; y++)
 			{
 				this->pixel_color = this->images[z].color(this->images[z].pixelIndex(x, y));
 				if (255 == qRed(this->pixel_color) && 255 == qGreen(this->pixel_color) && 255 == qBlue(this->pixel_color))
@@ -71,15 +95,19 @@ bool Algorithm_base::Reload(int* begin, int* end)
 	this->deltaz = this->begin.z - this->end.z;
 
 	this->nodes_queue.push(this->begin);
+
+
 	return true;
 }
 
 void Algorithm_base::Executive() {
 	while (!(this->queue_top.x == this->end.x && this->queue_top.y == this->end.y && this->queue_top.z == this->end.z))
 	{
-		if (this->nodes_queue.empty()) { 
+		if (this->nodes_queue.empty()) 
+		{ 
 			
-			return; }
+			return; 
+		}
 
 		this->queue_top.x = nodes_queue.top().x;
 		this->queue_top.y = nodes_queue.top().y;
@@ -133,9 +161,9 @@ void Algorithm_base::Executive() {
 		this->auxiliary = this->auxiliary->next;
 	}
 
-	for (size_t z = 0; z < 208; z++) {
-		for (size_t x = 0; x < 200; x++) {
-			for (size_t y = 0; y < 200; y++) {
+	for (size_t z = 0; z < this->images_number; z++) {
+		for (size_t x = 0; x < this->width; x++) {
+			for (size_t y = 0; y < this->height; y++) {
 				this->nodes[z][x][y].next = nullptr;
 				if (this->nodes[z][x][y].blue) this->images[z].setPixel(x, y, 6);
 
@@ -153,9 +181,9 @@ void Algorithm_base::Executive() {
 	for (size_t i = z_min; i <= z_max; i++)
 	{
 		
-		QString filename = QString("testy_%1.bmp").arg(i, 4, 10, QChar('0'));
+		QString filename = QString("Image_%1.bmp").arg(i, 4, 10, QChar('0'));
 
-		images[i].save(this->result_path + "//" + QString("testy_%1.bmp").arg(i, 4, 10, QChar('0')));
+		images[i].save(this->result_path + "//" + QString("Image_%1.bmp").arg(i, 4, 10, QChar('0')));
 
 	}
 	qDebug() << "Koszt: " << this->nodes[this->end.z][this->end.x][this->end.y].real;
@@ -163,6 +191,8 @@ void Algorithm_base::Executive() {
 	while (!nodes_queue.empty()) {
 		nodes_queue.pop();
 	}
+
+	
 
 	delete[] images;
 };
@@ -174,7 +204,7 @@ void Algorithm_base::Nodes_calculation(int dz, int dx, int dy, float dreal)
 	int z = this->queue_top.z + dz;
 	float real = this->queue_top.real + dreal;
 
-	if (x >= 0 && x <= 199 && y >= 0 && y <= 199 && z >= 0 && z < this->images_number)
+	if (x >= 0 && x < this->width && y >= 0 && y < this->height && z >= 0 && z < this->images_number)
 	{
 
 		if (this->nodes[z][x][y].white)
@@ -187,6 +217,7 @@ void Algorithm_base::Nodes_calculation(int dz, int dx, int dy, float dreal)
 			this->nodes[z][x][y].white = false;
 			this->nodes[z][x][y].next = &this->nodes[this->queue_top.z][this->queue_top.x][this->queue_top.y];
 
+			this->NumberOfVisitedNodes++;
 
 			(this->*Search_type)(z, x, y, real);
 		}
@@ -230,4 +261,17 @@ void  Algorithm_base::Searching_for_euclidean_value(int& z, int& x, int& y, floa
 	this->deltaz = z - this->end.z;
 	this->heuristics = std::sqrt((this->deltax * this->deltax) + (this->deltay * this->deltay) + (this->deltaz * this->deltaz));
 	this->nodes_queue.push(node(x, y, z, real, heuristics ));
+}
+
+Algorithm_base::~Algorithm_base()
+{
+	for (int z = 0; z < this->images_number; ++z) 
+	{
+		for (int x = 0; x < this->width; ++x) 
+		{
+			delete[] nodes[z][x];
+		}
+		delete[] nodes[z];
+	}
+	delete[] nodes;
 }
