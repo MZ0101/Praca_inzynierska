@@ -103,10 +103,10 @@ bool Algorithm_base::Reload(int* begin, int* end)
 void Algorithm_base::Executive() {
 	while (!(this->queue_top.x == this->end.x && this->queue_top.y == this->end.y && this->queue_top.z == this->end.z))
 	{
-		if (this->nodes_queue.empty()) 
-		{ 
-			
-			return; 
+		if (this->nodes_queue.empty())
+		{
+
+			return;
 		}
 
 		this->queue_top.x = nodes_queue.top().x;
@@ -116,33 +116,9 @@ void Algorithm_base::Executive() {
 		this->queue_top.real = nodes_queue.top().real;
 		this->nodes_queue.pop();
 
-		for (int z{ -1 }; z < 2; z++)
-		{
-			this->Nodes_calculation(z, 1, 0, 1.0);
-
-
-			this->Nodes_calculation(z, 0, 1, 1.0);
-
-
-			this->Nodes_calculation(z, -1, 0, 1.0);
-
-
-			this->Nodes_calculation(z, 0, -1, 1.0);
-
-
-			this->Nodes_calculation(z, 1, 1, 1.41);
-
-
-			this->Nodes_calculation(z, -1, -1, 1.41);
-
-
-			this->Nodes_calculation(z, 1, -1, 1.41);
-
-
-			this->Nodes_calculation(z, -1, 1, 1.41);
-		}
-		this->Nodes_calculation(-1, 0, 0, 1.0);
-		this->Nodes_calculation(1, 0, 0, 1.0);
+		this->CalculationForForZEqualsZero(0);
+		this->CalculationForZUpAndDownValue(1);
+		this->CalculationForZUpAndDownValue(-1);
 
 	}
 
@@ -186,16 +162,66 @@ void Algorithm_base::Executive() {
 		images[i].save(this->result_path + "//" + QString("Image_%1.bmp").arg(i, 4, 10, QChar('0')));
 
 	}
-	qDebug() << "Koszt: " << this->nodes[this->end.z][this->end.x][this->end.y].real;
+	qDebug() << "Koszt: " << this->nodes[this->end.z][this->end.x][this->end.y].real ;
 
 	while (!nodes_queue.empty()) {
 		nodes_queue.pop();
 	}
 
-	
-
 	delete[] images;
 };
+void Algorithm_base::CalculationForForZEqualsZero(int deltaz) {
+
+	this->Nodes_calculation(deltaz, 1, 0, 1.0);
+
+
+	this->Nodes_calculation(deltaz, 0, 1, 1.0);
+
+
+	this->Nodes_calculation(deltaz, -1, 0, 1.0);
+
+
+	this->Nodes_calculation(deltaz, 0, -1, 1.0);
+
+
+	this->Nodes_calculation(deltaz, 1, 1, 1.41);
+
+
+	this->Nodes_calculation(deltaz, -1, -1, 1.41);
+
+
+	this->Nodes_calculation(deltaz, 1, -1, 1.41);
+
+
+	this->Nodes_calculation(deltaz, -1, 1, 1.41);
+}
+
+void Algorithm_base::CalculationForZUpAndDownValue(int deltaz) {
+	this->Nodes_calculation(deltaz, 1, 0, 1.41);
+
+
+	this->Nodes_calculation(deltaz, 0, 1, 1.41);
+
+
+	this->Nodes_calculation(deltaz, -1, 0, 1.41);
+
+
+	this->Nodes_calculation(deltaz, 0, -1, 1.41);
+
+
+	this->Nodes_calculation(deltaz, 1, 1, 1.73);
+
+
+	this->Nodes_calculation(deltaz, -1, -1, 1.73);
+
+
+	this->Nodes_calculation(deltaz, 1, -1, 1.73);
+
+
+	this->Nodes_calculation(deltaz, -1, 1, 1.73);
+
+	this->Nodes_calculation(deltaz, 0, 0, 1.0);
+}
 
 void Algorithm_base::Nodes_calculation(int dz, int dx, int dy, float dreal)
 {

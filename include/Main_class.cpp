@@ -268,7 +268,7 @@ void Main_class::CalculatingTheCostOfTheRoad()
                     RoadCost = PerformingCalculations->nodes[this->EndPoint[2]][this->EndPoint[0]][this->EndPoint[1]].real;
                     this->result_10->max_series++;
                     this->result_10->series_array[this->result_10->max_series] = i;
-                    this->result_10->series_labels[this->result_10->max_series].setText("Series " + QString::number(i + 1) + " : " + QString::number(RoadCost));
+                    this->result_10->series_labels[this->result_10->max_series].setText("Series " + QString::number(i + 1) + " : " + QString::number(RoadCost *50) +" [nm]");
                     this->result_10->series_labels[this->result_10->max_series].setStyleSheet("background-color: white; border : 2px solid grey;");
 
                     this->result_10->NumberOfVisitedNodesArray[this->result_10->max_series] = PerformingCalculations->NumberOfVisitedNodes;
@@ -287,7 +287,8 @@ void Main_class::CalculatingTheCostOfTheRoad()
                 double AverageEucleideanDistances = SumOfEucleideanDistances / NumberOfCountedSeries;
                 double GeometricTortuosity = this->AverageRoadCost / AverageEucleideanDistances;
 
-                this->result_10->main_result->LayoutForResult.setText("Average cost: " + QString::number(this->AverageRoadCost));
+                this->result_10->main_result->LayoutForResult.setText("Average path cost: " + QString::number(this->AverageRoadCost * 50) + " [nm]");
+                this->result_10->main_result->LayoutForResult.setFixedSize(240, 25);
                 this->result_10->main_result->LayoutForResult.setStyleSheet("background-color: white; border : 2px solid blue; font-weight: bold;");
 
                 this->result_10->main_result->LayoutForGeometricTortuosity.setText("Geometric tortuosity: " + QString::number(GeometricTortuosity));
@@ -324,9 +325,9 @@ void Main_class::CalculatingTheCostOfTheRoad()
             {
                
                 PerformingCalculations->Executive();
-                this->AverageRoadCost = PerformingCalculations->nodes[this->EndPoint[2]][this->EndPoint[0]][this->EndPoint[1]].real;
+                this->AverageRoadCost = PerformingCalculations->nodes[this->EndPoint[2]][this->EndPoint[0]][this->EndPoint[1]].real ;
 
-                this->result_1->LayoutForResult.setText("Cost of the road: " + QString::number(this->AverageRoadCost));
+                this->result_1->LayoutForResult.setText("Path cost: " + QString::number(this->AverageRoadCost * 50) +" [nm]");
 
                 double GeometricTortuosity = this->AverageRoadCost / EucleideanDistanceCalculation();
                 unsigned long int NumberOfVisitedNodes = PerformingCalculations->NumberOfVisitedNodes;

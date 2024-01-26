@@ -5,7 +5,9 @@
 #include <queue>
 #include <QDir>
 #include <QString>
+#include <list>
 #include <array>
+#include <algorithm>
 
 struct node
 {
@@ -56,13 +58,16 @@ public:
 
 	QImage* images = nullptr;
 
-	std::priority_queue<node, std::vector<node>, std::greater<node>> nodes_queue;
+	std::priority_queue<node, std::deque<node>, std::greater<node>> nodes_queue; // to do testów jeszcze z t¹ kolejk¹ 
 	node begin;
 	node end;
 
 	void(Algorithm_base::* Search_type)(int& z, int& x, int& y, float& real);
 	void Executive();
 	void Nodes_calculation(int dz, int dx, int dy, float dreal);
+
+	void CalculationForForZEqualsZero(int deltaz);
+	void CalculationForZUpAndDownValue(int deltaz);
 
 	void Searching_for_real_value(int& z, int& x, int& y, float& real); // Dijkstra algorithm - real
 	void Searching_for_total_value(int& z, int& x, int& y, float& real); // A* algorithm - euclidean + real

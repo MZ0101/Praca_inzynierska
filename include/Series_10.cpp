@@ -104,7 +104,6 @@ void Series_10::randomization_of_points()
 
                 } while (qRed(pixel_color) != 255 && qBlue(pixel_color) != 255 && qGreen(pixel_color) != 255);
 
-
                 do
                 {
                     end[0] = std::rand() % ImageWidth;
