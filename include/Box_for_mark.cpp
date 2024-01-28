@@ -16,7 +16,7 @@ Box_for_mark::Box_for_mark(QWidget* parent) : QGroupBox(parent)
 	this->files_name->setFixedSize(225, 25);
 
 	QString button_names[2] = { "Previosus","Another" };
-	QString data_labels_text[3] = { "x:", "y:" , "z:" };
+	QString data_labels_text[3] = { "x (max: 200):", "y (max:200 ) :" , "z (max: 207):" };
 
 	this->h_layouts = new QHBoxLayout[2];
 	this->v_layout = new QVBoxLayout();
@@ -39,7 +39,7 @@ Box_for_mark::Box_for_mark(QWidget* parent) : QGroupBox(parent)
 				
 		}
 		    this->data_labels[i].setText(data_labels_text[i]);
-			this->data_labels[i].setFixedSize(QSize(25,25));
+			this->data_labels[i].setFixedSize(QSize(80,25));
 			this->h_layouts[0].addWidget(&this->data_labels[i]);
 			this->h_layouts[0].addWidget(&this->edit[i]);
 			this->edit[i].setText("0");

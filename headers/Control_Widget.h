@@ -38,11 +38,10 @@ class WidgetsControl : public QWidget
 
 public:
 	WidgetsControl();
-	~WidgetsControl();
+	~WidgetsControl() {};
 
 	QHBoxLayout* horisontal = nullptr;
-	QVBoxLayout* vertical = nullptr;
-
+    QVBoxLayout* vertical = nullptr;
 	Begin_Widget* begin_widget = nullptr;
 
 	Buttons buttons[2];
@@ -50,10 +49,9 @@ public:
 
 	int current_widget{ 0 };
 
-protected:
+protected slots:
 
 	void previous_widget();
 	void another_widget();
-
 
 };

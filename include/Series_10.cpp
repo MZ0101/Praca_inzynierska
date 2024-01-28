@@ -70,6 +70,8 @@ void Series_10::mark_button(Buttons* button_clicked)
 void Series_10::randomization_of_points()
 {
 
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
     QDir dir("Dane");
     QStringList files_list = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
 
@@ -81,7 +83,7 @@ void Series_10::randomization_of_points()
     int ImageHeight = ImageForRandomize.height();
     
    
-   
+ 
     int begin[3] = { 0,0,0 };
     int end[3] = { 0,0,0 };
     

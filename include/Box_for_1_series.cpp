@@ -6,7 +6,7 @@ Box_for_1_series::Box_for_1_series(QWidget* parent, QString title) :QGroupBox(pa
 	this->setFocusPolicy(Qt::StrongFocus);
 	this->main_group = new QVBoxLayout();
 
-	QString nazwy[3]{ "Width (x):", "Height (y):", "Picture number (z):" };
+	QString nazwy[3]{ "Width (x max:200):", "Height (y max:200):", "Picture number (z max:207):" };
 	this->setAlignment(Qt::AlignCenter);
 	this->edit = new LineEdit[3];
 	this->group = new QHBoxLayout[3];

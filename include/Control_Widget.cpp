@@ -10,14 +10,14 @@ Begin_Widget::Begin_Widget(QWidget* parent) : QWidget(parent)
 	{
 		this->check_1[i].setText(text[i]);
 		this->vertical_1[0].addWidget(&this->check_1[i]);
-		QObject::connect(&this->check_1[i], &QCheckBox::stateChanged, this, &Begin_Widget::currentCheckBox_1);
+		QObject::connect(&this->check_1[i], &QCheckBox::clicked, this, &Begin_Widget::currentCheckBox_1);
 	}
 
 	for (size_t i{ 0 }; i < 3; i++) 
 	{
 		this->check_2[i].setText(text_heuristic[i]);
 		this->vertical_1[1].addWidget(&this->check_2[i]);
-		QObject::connect(&this->check_2[i], &QCheckBox::stateChanged, this, &Begin_Widget::currentCheckBox_2);
+		QObject::connect(&this->check_2[i], &QCheckBox::clicked, this, &Begin_Widget::currentCheckBox_2);
 
 	}
 
@@ -31,83 +31,52 @@ Begin_Widget::Begin_Widget(QWidget* parent) : QWidget(parent)
 
 	this->check_1[0].setChecked(true);
 	this->check_2[0].setChecked(true);
+
 	this->setLayout(&this->main_layout);
 }
 
-void Begin_Widget::currentCheckBox_1() // do poprawy
+void Begin_Widget::currentCheckBox_1() 
 {
 	QCheckBox* current_Box = qobject_cast<QCheckBox*>(sender());
 
-	QObject::disconnect(&this->check_1[0], &QCheckBox::stateChanged, this, &Begin_Widget::currentCheckBox_1);
-	QObject::disconnect(&this->check_1[1], &QCheckBox::stateChanged, this, &Begin_Widget::currentCheckBox_1);
+	int n = sizeof(this->check_1) / sizeof(this->check_1[0]);
+	
 
-	if (current_Box == &this->check_1[0] && this->check_1[1].isChecked())
+	for (int i = 0; i < n; i++)
 	{
-		this->check_1[0].setChecked(true);
-		this->check_1[1].setChecked(false);
+		this->check_1[i].setChecked(false);
 	}
-	else if (current_Box == &this->check_1[1] && this->check_1[0].isChecked())
-	{
-		this->check_1[0].setChecked(false);
-		this->check_1[1].setChecked(true);
-	}
-	QObject::connect(&this->check_1[0], &QCheckBox::stateChanged, this, &Begin_Widget::currentCheckBox_1);
-	QObject::connect(&this->check_1[1], &QCheckBox::stateChanged, this, &Begin_Widget::currentCheckBox_1);
+	
+	current_Box->setChecked(true);
+
 }
 
-void Begin_Widget::currentCheckBox_2() // to jest te¿ do poprawy 
+void Begin_Widget::currentCheckBox_2() 
 {
 	QCheckBox* current_Box = qobject_cast<QCheckBox*>(sender());
 
-	QObject::disconnect(&this->check_2[0], &QCheckBox::stateChanged, this, &Begin_Widget::currentCheckBox_2);
-	QObject::disconnect(&this->check_2[1], &QCheckBox::stateChanged, this, &Begin_Widget::currentCheckBox_2);
-	QObject::disconnect(&this->check_2[2], &QCheckBox::stateChanged, this, &Begin_Widget::currentCheckBox_2);
+	int n = sizeof(this->check_2) / sizeof(this->check_2[0]);
 
 
-	if (current_Box == &this->check_2[0] && (this->check_2[1].isChecked() || this->check_2[2].isChecked()) )
+	for (int i = 0; i < n; i++)
 	{
-	
-		this->check_2[0].setChecked(true);
-		this->check_2[1].setChecked(false);
-		this->check_2[2].setChecked(false);
-
-	}
-	else if (current_Box == &this->check_2[1] && (this->check_2[0].isChecked() || this->check_2[2].isChecked()))
-	{
-	
-		this->check_2[0].setChecked(false);
-		this->check_2[1].setChecked(true);
-		this->check_2[2].setChecked(false);
+		this->check_2[i].setChecked(false);
 	}
 
-	else if (current_Box == &this->check_2[2] && (this->check_2[0].isChecked() || this->check_2[1].isChecked()))
-	{
-		this->check_2[0].setChecked(false);
-		this->check_2[1].setChecked(false);
-		this->check_2[2].setChecked(true);
-	}
-	else
-	{
-		current_Box->setChecked(true);
-	}
-
-
-	QObject::connect(&this->check_2[0], &QCheckBox::stateChanged, this, &Begin_Widget::currentCheckBox_2);
-	QObject::connect(&this->check_2[1], &QCheckBox::stateChanged, this, &Begin_Widget::currentCheckBox_2);
-	QObject::connect(&this->check_2[2], &QCheckBox::stateChanged, this, &Begin_Widget::currentCheckBox_2);
-
+	current_Box->setChecked(true);
 }
 
 WidgetsControl::WidgetsControl()
 {
 	this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+	this->vertical = new QVBoxLayout(this);
+
+	this->begin_widget = new Begin_Widget(this);
+	this->horisontal = new QHBoxLayout(this);
+
 	this->buttons[0].setText("Previous");
 	this->buttons[1].setText("Another");
-	
-
-	this->begin_widget = new Begin_Widget();
-
-    this->horisontal = new QHBoxLayout();
 	
 	this->horisontal->addWidget(&this->buttons[0]);
 	this->horisontal->addWidget(&this->buttons[1]);
@@ -115,8 +84,7 @@ WidgetsControl::WidgetsControl()
 	QObject::connect(&this->buttons[0], &QPushButton::clicked, this, &WidgetsControl::previous_widget);
 	QObject::connect(&this->buttons[1], &QPushButton::clicked, this, &WidgetsControl::another_widget);
 
-	this->vertical = new QVBoxLayout();
-
+	
 	this->horisontal->setAlignment(Qt::AlignLeft);
 	this->vertical->addLayout(this->horisontal);
 
@@ -151,13 +119,4 @@ void WidgetsControl::another_widget()
 		this->vertical->addWidget(this->widget_array[this->current_widget]);
 		this->widget_array[this->current_widget]->show();
 	}
-}
-
-
-WidgetsControl::~WidgetsControl()
-{
-
-	delete begin_widget;
-	delete horisontal;
-	delete vertical;
 }

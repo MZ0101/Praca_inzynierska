@@ -3,7 +3,7 @@
 Mark::Mark(QWidget *parent) : QWidget(parent)
 {
 
-    QString BoxsForMarkBeginAndEndPoint_Name[2] = { "Begining Data","End Data" };
+    QString BoxsForMarkBeginAndEndPoint_Name[2] = { "Start data","Target data" };
 
     this->BoxsForMarkBeginAndEndPoint = new Box_for_mark[2];
     this->HorisontalLayoutForBoxsForMark = new QHBoxLayout();
@@ -15,7 +15,7 @@ Mark::Mark(QWidget *parent) : QWidget(parent)
 
     this->CheckImageSizeAndChangeViewSize();
 
-    for (size_t i{ 0 }; i < 2; i++)
+    for (int i{ 0 }; i < 2; i++)
     {
         this->BoxsForMarkBeginAndEndPoint[i].setTitle(BoxsForMarkBeginAndEndPoint_Name[i]);
         this->BoxsForMarkBeginAndEndPoint[i].ViewForImage->installEventFilter(this);

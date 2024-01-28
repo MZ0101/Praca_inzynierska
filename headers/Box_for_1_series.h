@@ -21,7 +21,7 @@ public:
 
 	int currentLineEdit{ 0 };
 
-protected:
+protected slots:
 
 	void mousePressEvent(QMouseEvent* event) override;
 	void keyPressEvent(QKeyEvent* event) override;

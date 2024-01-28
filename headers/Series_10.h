@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QDir>
+#include <ctime> 
 #include "Box_for_10_series.h"
 
 class Series_10 : public QWidget
