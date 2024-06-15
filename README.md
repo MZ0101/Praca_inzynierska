@@ -29,4 +29,4 @@ The project can be developed by adding new features:
 - Allowing the user to view processing results across different data sets.<br>
 - Allow user to select path search criterion from results overview.<br>
 - Create an installer that will make it easier for other users to install the program.<br>
-- You can optimize the performance of the program.<br>
+
